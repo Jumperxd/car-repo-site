@@ -1,0 +1,14 @@
+*.pyproj
+/obj
+*.sqlite3
+/virtual_enviroment
+/.idea
+.coverage
+*/migrations
+Pipfile*
+/_*
+conf.py
+index.rst
+make.bat
+Makefile
+__pycache__/
