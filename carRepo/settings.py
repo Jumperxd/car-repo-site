@@ -49,6 +49,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'account',
+    'cars',
+    'manufacturer',
+    'powertrain',
+    'tires',
 ]
 
 MIDDLEWARE = [
@@ -61,7 +66,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'carRepo.carRepo.urls'
+ROOT_URLCONF = 'carRepo.urls'
 
 TEMPLATES = [
     {
@@ -79,7 +84,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'carRepo.carRepo.wsgi.application'
+WSGI_APPLICATION = 'carRepo.wsgi.application'
 
 
 # Database
