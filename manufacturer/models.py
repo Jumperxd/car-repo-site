@@ -18,6 +18,7 @@ class Manufacturer(models.Model):
 class ManufacturerPhoneNumbers(models.Model):
     """This class will contain the multi attribute phone number"""
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
+    number_type = models.CharField(max_length=man_const.MANUFACTURER_PHONE_TYPE_MAX_LENGTH)
     phone_number = models.CharField(max_length=man_const.MANUFACTURER_PHONE_MAX_LENGTH)
 
     class Meta:
@@ -26,4 +27,7 @@ class ManufacturerPhoneNumbers(models.Model):
 
     def __str__(self):
         """This function will translate this model to a string"""
-        return '({}) {}-{}'.format(self.phone_number[:3], self.phone_number[3:6], self.phone_number[-4:])
+        return '{}: ({}) {}-{}'.format(self.number_type,
+                                       self.phone_number[:3],
+                                       self.phone_number[3:6],
+                                       self.phone_number[-4:])

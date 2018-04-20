@@ -1,0 +1,51 @@
+/* A general stylesheet that will dictate the properties of some html tags */
+
+p, h2, a {
+    color: white;
+}
+
+h2 {
+    text-align: center;
+}
+
+body {
+    background: #222222 url("images/dark-concrete.png") repeat;
+    padding-top: 70px;
+    padding-bottom: 20px;
+}
+
+a:hover {
+    color: lightgray;
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.car_image {
+    margin: auto;
+    display: block;
+    width: 50%;
+}
+
+.message {
+    font-style: italic;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: lawngreen;
+}
+
+.info {
+    color: lightblue;
+}
+
+.errorlist .error {
+    color: red;
+    font-style: italic;
+}
