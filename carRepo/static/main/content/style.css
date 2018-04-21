@@ -1,6 +1,6 @@
 /* A general stylesheet that will dictate the properties of some html tags */
 
-p, h2, a {
+p, h2, a, legend, label {
     color: white;
 }
 
@@ -12,6 +12,10 @@ body {
     background: #222222 url("images/dark-concrete.png") repeat;
     padding-top: 70px;
     padding-bottom: 20px;
+}
+
+input {
+    margin-bottom: 10px;
 }
 
 a:hover {

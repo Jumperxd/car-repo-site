@@ -13,14 +13,14 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     middle_initial = models.CharField(max_length=acc_const.PROFILE_MIDDLE_INITIAL_MAX_LENGTH, blank=True)
     address = models.CharField(max_length=acc_const.PROFILE_ADDRESS_MAX_LENGTH, blank=True)
-    date_of_birth = models.DateField()
+    date_of_birth = models.DateField(null=True, blank=True)
 
 
 class ProfilePhoneNumbers(models.Model):
     """This model represents User phone numbers"""
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    number_type = models.CharField(max_length=acc_const.PROFILE_NUMBER_TYPE_MAX_LENGTH)
-    phone_number = models.CharField(max_length=acc_const.PROFILE_PHONE_NUMBER_MAX_LENGTH)
+    number_type = models.CharField(max_length=acc_const.PROFILE_NUMBER_TYPE_MAX_LENGTH, default=None)
+    phone_number = models.CharField(max_length=acc_const.PROFILE_PHONE_NUMBER_MAX_LENGTH, default=None)
 
     class Meta:
         """Set table constraints"""

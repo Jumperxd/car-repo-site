@@ -18,8 +18,8 @@ class Manufacturer(models.Model):
 class ManufacturerPhoneNumbers(models.Model):
     """This class will contain the multi attribute phone number"""
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
-    number_type = models.CharField(max_length=man_const.MANUFACTURER_PHONE_TYPE_MAX_LENGTH)
-    phone_number = models.CharField(max_length=man_const.MANUFACTURER_PHONE_MAX_LENGTH)
+    number_type = models.CharField(max_length=man_const.MANUFACTURER_PHONE_TYPE_MAX_LENGTH, default=None)
+    phone_number = models.CharField(max_length=man_const.MANUFACTURER_PHONE_MAX_LENGTH, default=None)
 
     class Meta:
         """Specify constraints for this table"""

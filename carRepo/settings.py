@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'manufacturer',
     'powertrain',
     'tires',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
