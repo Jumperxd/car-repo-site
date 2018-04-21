@@ -10,6 +10,7 @@ PHONE_NUMBER_TYPE_PLACEHOLDER = 'Home, Work, Cell, etc.'
 EMAIL_PLACEHOLDER = 'myemail@example.com'
 
 USER_CREATION_TITLE = 'Create a New User'
+LOGIN_TITLE = 'Log In to Account'
 
 PHONE_NUMBER_FORMSET_MIN_NUM = 1
 PHONE_NUMBER_FORMSET_EXTRA = 0

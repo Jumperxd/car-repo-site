@@ -20,7 +20,9 @@ def create_user(request):
         profile_form = acc_forms.ProfileForm(request.POST)
         phone_number_formset = formset(request.POST)
         if user_form.is_valid() and profile_form.is_valid() and phone_number_formset.is_valid():
-            user = user_form.save()
+            user = user_form.save(commit=False)
+            user.set_password(user_form.cleaned_data['password'])
+            user.save()
             user.refresh_from_db()
             profile_form = acc_forms.ProfileForm(request.POST, instance=user.profile)
             profile_form.full_clean()
