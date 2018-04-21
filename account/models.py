@@ -34,6 +34,27 @@ class ProfilePhoneNumbers(models.Model):
                                        self.phone_number[-4:])
 
 
+class List(models.Model):
+    """This model represents a user listing a vehicle"""
+    profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    vehicle = models.OneToOneField('vehicle.Vehicle', on_delete=models.CASCADE)
+    address = models.CharField(max_length=acc_const.LIST_ADDRESS_MAX_LENGTH)
+    list_date = models.DateField(auto_now_add=True)
+    car_value = models.DecimalField(max_digits=acc_const.LIST_CAR_VALUE_MAX_DIGITS,
+                                    decimal_places=acc_const.LIST_CAR_VALUE_DECIMAL_PLACES)
+
+    class Meta:
+        """Constraints on this table"""
+        unique_together = ('profile', 'vehicle')
+
+    def __str__(self):
+        """Convert model to a string"""
+        return '{} being sold for {} at {}. Posted {}'.format(self.vehicle.vehicle_type,
+                                                              self.car_value,
+                                                              self.address,
+                                                              self.list_date)
+
+
 @receiver(post_save, sender=User)
 def update_profile(sender, instance, created, **kwargs):
     """A signal that will automatically save a Profile with a User"""

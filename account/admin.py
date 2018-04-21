@@ -1,3 +1,10 @@
+# Register Models to Django admin site.
+
 from django.contrib import admin
 
-# Register your models here.
+from . import models
+
+
+admin.site.register(models.Profile)
+admin.site.register(models.ProfilePhoneNumbers)
+admin.site.register(models.List)
