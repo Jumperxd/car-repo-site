@@ -11,5 +11,9 @@
         <p>{{ phone_number }}</p>
     {% endfor %}
     <a class="btn btn-secondary">Edit Profile</a>
-    <a class="btn btn-success">List a Vehicle</a>
+    <a class="btn btn-success" href="{% url 'vehicle:choose_vehicle' %}">List a Vehicle</a>
+    <a class="btn btn-danger" href="{% url 'index' %}">Back</a>
+    {% for list in listings %}
+        <p>{{ list }}</p>
+    {% endfor %}
 {% endblock %}

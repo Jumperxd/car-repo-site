@@ -19,6 +19,8 @@ LOGOUT_REDIRECT_URL = 'index'
 
 LOGIN_REDIRECT_URL = 'index'
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
 
 def get_env_variable(env_var):
     """This function will get an environment variable"""

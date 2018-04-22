@@ -54,8 +54,30 @@ def create_user(request):
 def profile(request):
     """Display a user profile."""
     phone_numbers = acc_models.ProfilePhoneNumbers.objects.filter(profile=request.user.profile)
+    listings = acc_models.List.objects.filter(profile=request.user.profile)
     context = {
         'title': acc_const.USER_PROFILE_TITLE,
         'phone_numbers': phone_numbers,
+        'listings': listings,
     }
     return render(request, 'account/profile.html', context)
+
+
+@login_required
+@transaction.atomic
+def list_vehicle(request, **kwargs):
+    """This view contains logic used to list a vehicle"""
+    if request.method == 'POST':
+        form = acc_forms.ListVehicleForm(request.POST)
+        list = form.save(commit=False)
+        list.profile = request.user.profile
+        list.vehicle = kwargs['vehicle']
+        list.save()
+        return redirect(reverse('account:profile'))
+    else:
+        form = acc_forms.ListVehicleForm()
+    context = {
+        'title': acc_const.LIST_VEHICLE_TITLE,
+        'form': form,
+    }
+    return render(request, 'account/list.html', context)

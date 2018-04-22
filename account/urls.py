@@ -22,4 +22,5 @@ urlpatterns = [
          name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('profile/', acc_views.profile, name='profile'),
+    path('list/<int:vehicle>/', acc_views.list_vehicle, name='list_vehicle'),
 ]

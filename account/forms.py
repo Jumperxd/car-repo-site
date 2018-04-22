@@ -41,3 +41,11 @@ class ProfilePhoneNumberForm(forms.ModelForm):
             'number_type': forms.TextInput(attrs={'placeholder': acc_const.PHONE_NUMBER_TYPE_PLACEHOLDER}),
             'phone_number': forms.TextInput(attrs={'placeholder': main_const.PHONE_NUMBER_FIELD_PLACEHOLDER}),
         }
+
+
+class ListVehicleForm(forms.ModelForm):
+    """A form to list a vehicle"""
+    class Meta:
+        """Attributes of this form"""
+        model = acc_models.List
+        fields = ['address', 'car_value']
