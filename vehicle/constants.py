@@ -11,4 +11,7 @@ TRUCK_BED_WIDTH_DECIMAL_PLACES = 2
 
 COUPE_TOP_STYLE_MAX_LENGTH = 100
 
-CHOOSE_VEHICLE_TITLE = 'Choose a vehicle or add a new one.'
+VEHICLE_TYPE_PLACEHOLDER = 'Sedan, SUV, Toyate, 4-Door, Red, etc.'
+
+CHOOSE_VEHICLE_TITLE = 'Choose A Pre-existing Vehicle'
+ADD_VEHICLE_TITLE = 'Add A New Vehicle'

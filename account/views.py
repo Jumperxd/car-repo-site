@@ -6,6 +6,8 @@ from django.db import transaction
 from django.forms import formset_factory
 from django.shortcuts import render, redirect, reverse
 
+from carRepo import constants as main_const
+
 from . import forms as acc_forms, constants as acc_const, models as acc_models
 
 
@@ -27,16 +29,14 @@ def create_user(request):
             user.refresh_from_db()
             profile_form = acc_forms.ProfileForm(request.POST, instance=user.profile)
             profile_form.full_clean()
-            profile_form.save()
-            profile = user.profile.__dict__; del profile['_state']
-            profile = acc_models.Profile.objects.get(**profile)
+            profile_obj = profile_form.save()
             for form in phone_number_formset:
                 phone_number = form.save(commit=False)
-                phone_number.profile = profile
+                phone_number.profile = profile_obj
                 phone_number.save()
             return redirect(reverse('index'))
         else:
-            messages.error(request, acc_const.SIGNUP_ERROR_MESSAGE)
+            messages.error(request, main_const.ERROR_MESSAGE)
     else:
         user_form = acc_forms.UserForm()
         profile_form = acc_forms.ProfileForm()
@@ -69,11 +69,15 @@ def list_vehicle(request, **kwargs):
     """This view contains logic used to list a vehicle"""
     if request.method == 'POST':
         form = acc_forms.ListVehicleForm(request.POST)
-        list = form.save(commit=False)
-        list.profile = request.user.profile
-        list.vehicle = kwargs['vehicle']
-        list.save()
-        return redirect(reverse('account:profile'))
+        if form.is_valid():
+            list_data = form.save(commit=False)
+            list_data.profile = request.user.profile
+            list_data.vehicle = kwargs['vehicle']
+            list_data.save()
+            messages.success(request, acc_const.LIST_SUCCESS_MESSAGE)
+            return redirect(reverse('account:profile'))
+        else:
+            messages.error(request, main_const.ERROR_MESSAGE)
     else:
         form = acc_forms.ListVehicleForm()
     context = {

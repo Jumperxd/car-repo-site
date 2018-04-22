@@ -1,0 +1,5 @@
+{% extends 'main/generic_form.html' %}
+{% block back-button %}
+    <a class="btn btn-primary" href="{% url 'manufacturer:add_manufacturer' %}">Add New Manufacturer</a>
+    <a class="btn btn-danger" href="{% url 'account:profile' %}">Back to Profile Page</a>
+{% endblock %}

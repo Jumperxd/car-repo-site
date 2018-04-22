@@ -1,0 +1,25 @@
+<{% extends 'main/layout.html' %}
+{% block content %}
+    {% load staticfiles %}
+    {% load crispy_forms_tags %}
+    <form method="post">
+        {% csrf_token %}
+        {{ manufacturer_form | crispy }}
+        {{ phone_number_formset.management_form }}
+        {% for form in phone_number_formset %}
+            <div class="phone_numbers">
+                {{ form | crispy }}
+            </div>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary" value="Submit" style="margin-bottom: 0;" />
+    </form>
+    <script src="{% static 'main/scripts/jquery.formset.js' %}"></script>
+    <script>
+        $('.phone_numbers').formset({
+            addText: 'Add Phone Number',
+            deleteText: 'Remove Phone Number',
+            addCssClass: 'btn btn-success',
+            deleteCssClass: 'btn btn-danger'
+        });
+    </script>
+{% endblock %}

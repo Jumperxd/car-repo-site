@@ -9,6 +9,8 @@ PROFILE_NUMBER_TYPE_MAX_LENGTH = 30
 PHONE_NUMBER_TYPE_PLACEHOLDER = 'Home, Work, Cell, etc.'
 EMAIL_PLACEHOLDER = 'myemail@example.com'
 
+LIST_SUCCESS_MESSAGE = 'Vehicle listed successfully!'
+
 USER_CREATION_TITLE = 'Create a New User'
 LOGIN_TITLE = 'Log In to Account'
 USER_PROFILE_TITLE = 'Your Profile Information'
@@ -16,8 +18,6 @@ LIST_VEHICLE_TITLE = 'List Address and Cost of Vehicle'
 
 PHONE_NUMBER_FORMSET_MIN_NUM = 1
 PHONE_NUMBER_FORMSET_EXTRA = 0
-
-SIGNUP_ERROR_MESSAGE = 'Error entering information. Please correct errors below.'
 
 LIST_ADDRESS_MAX_LENGTH = 200
 LIST_CAR_VALUE_MAX_DIGITS = 17

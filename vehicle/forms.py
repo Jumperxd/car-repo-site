@@ -2,7 +2,7 @@
 
 from django import forms
 
-from . import models as veh_models
+from . import models as veh_models, constants as veh_const
 
 
 class ChooseVehicleForm(forms.Form):
@@ -10,9 +10,12 @@ class ChooseVehicleForm(forms.Form):
     vehicle = forms.ModelChoiceField(queryset=veh_models.Vehicle.objects.all())
 
 
-class AddVehicleForm(forms.ModelForm):
+class VehicleForm(forms.ModelForm):
     """This class describes a form to add a new vehicle to the database"""
     class Meta:
         """Form attributes"""
         model = veh_models.Vehicle
         fields = ['vehicle_type', 'weight']
+        widgets = {
+            'vehicle_type': forms.TextInput(attrs={'placeholder': veh_const.VEHICLE_TYPE_PLACEHOLDER}),
+        }
