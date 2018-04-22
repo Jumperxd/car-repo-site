@@ -1,6 +1,7 @@
 # Logic for user accounts
 
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.forms import formset_factory
 from django.shortcuts import render, redirect, reverse
@@ -47,3 +48,14 @@ def create_user(request):
         'phone_number_formset': phone_number_formset,
     }
     return render(request, 'account/signup.html', context)
+
+
+@login_required
+def profile(request):
+    """Display a user profile."""
+    phone_numbers = acc_models.ProfilePhoneNumbers.objects.filter(profile=request.user.profile)
+    context = {
+        'title': acc_const.USER_PROFILE_TITLE,
+        'phone_numbers': phone_numbers,
+    }
+    return render(request, 'account/profile.html', context)

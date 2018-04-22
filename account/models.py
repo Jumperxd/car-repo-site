@@ -15,6 +15,10 @@ class Profile(models.Model):
     address = models.CharField(max_length=acc_const.PROFILE_ADDRESS_MAX_LENGTH, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
 
+    def __str__(self):
+        """Convert model to a string"""
+        return self.user.username
+
 
 class ProfilePhoneNumbers(models.Model):
     """This model represents User phone numbers"""

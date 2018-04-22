@@ -1,0 +1,15 @@
+{% extends 'main/layout.html' %}
+{% block content %}
+    <p>Here is all of your user information:</p>
+    <p>First Name: {{ user.first_name }}</p>
+    <p>Last Name: {{ user.last_name }}</p>
+    <p>Middle Initial: {{ user.profile.middle_initial }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Address: {{ user.profile.address }}</p>
+    <p>Birth Date: {{ user.profile.date_of_birth }}</p>
+    {% for phone_number in phone_numbers %}
+        <p>{{ phone_number }}</p>
+    {% endfor %}
+    <a class="btn btn-secondary">Edit Profile</a>
+    <a class="btn btn-success">List a Vehicle</a>
+{% endblock %}

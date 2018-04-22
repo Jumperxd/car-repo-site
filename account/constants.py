@@ -11,6 +11,7 @@ EMAIL_PLACEHOLDER = 'myemail@example.com'
 
 USER_CREATION_TITLE = 'Create a New User'
 LOGIN_TITLE = 'Log In to Account'
+USER_PROFILE_TITLE = 'Your Profile Information'
 
 PHONE_NUMBER_FORMSET_MIN_NUM = 1
 PHONE_NUMBER_FORMSET_EXTRA = 0

@@ -19,6 +19,7 @@ LOGOUT_REDIRECT_URL = 'index'
 
 LOGIN_REDIRECT_URL = 'index'
 
+
 def get_env_variable(env_var):
     """This function will get an environment variable"""
     try:
