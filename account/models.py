@@ -53,7 +53,7 @@ class List(models.Model):
 
     def __str__(self):
         """Convert model to a string"""
-        return '{} being sold for {} at {}. Posted {}.'.format(self.vehicle.vehicle_type,
+        return '{} being sold for {} at {}. Posted {}.'.format(self.vehicle,
                                                                self.car_value,
                                                                self.address,
                                                                self.list_date)

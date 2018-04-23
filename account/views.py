@@ -35,8 +35,7 @@ def create_user(request):
                 phone_number.profile = profile_obj
                 phone_number.save()
             return redirect(reverse('index'))
-        else:
-            messages.error(request, main_const.ERROR_MESSAGE)
+        messages.error(request, main_const.ERROR_MESSAGE)
     else:
         user_form = acc_forms.UserForm()
         profile_form = acc_forms.ProfileForm()
@@ -76,8 +75,7 @@ def list_vehicle(request, **kwargs):
             list_data.save()
             messages.success(request, acc_const.LIST_SUCCESS_MESSAGE)
             return redirect(reverse('account:profile'))
-        else:
-            messages.error(request, main_const.ERROR_MESSAGE)
+        messages.error(request, main_const.ERROR_MESSAGE)
     else:
         form = acc_forms.ListVehicleForm()
     context = {

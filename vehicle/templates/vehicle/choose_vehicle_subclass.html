@@ -1,0 +1,4 @@
+{% extends 'main/generic_form.html' %}
+{% block back-button %}
+    <a class="btn btn-primary" href="{% url subclass_url vehicle=vehicle %}">Add {{ vehicle_subclass }}</a>
+{% endblock %}

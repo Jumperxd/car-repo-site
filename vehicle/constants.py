@@ -13,5 +13,26 @@ COUPE_TOP_STYLE_MAX_LENGTH = 100
 
 VEHICLE_TYPE_PLACEHOLDER = 'Sedan, SUV, Toyate, 4-Door, Red, etc.'
 
-CHOOSE_VEHICLE_TITLE = 'Choose A Pre-existing Vehicle'
+CHOOSE_VEHICLE_TITLE = 'Choose A Pre-Existing Vehicle'
+CHOOSE_SEDAN_TITLE = 'Choose A Pre-Existing Sedan'
+CHOOSE_TRUCK_TITLE = 'Choose A Pre-Existing Truck'
+CHOOSE_COUPE_TITLE = 'Choose A Pre-Existing Coupe'
+CHOOSE_SUV_TITLE = 'Choose A Pre-Existing SUV'
 ADD_VEHICLE_TITLE = 'Add A New Vehicle'
+ADD_SEDAN_TITLE = 'Add A New Sedan'
+ADD_TRUCK_TITLE = 'Add A New Truck'
+ADD_COUPE_TITLE = 'Add A New Coupe'
+ADD_SUV_TITLE = 'Add A New SUV'
+
+INAPPLICABLE = '1'
+SEDAN = '2'
+TRUCK = '3'
+COUPE = '4'
+SUV = '5'
+OTHER = '6'
+VEHICLE_TYPE_CHOICES = ((INAPPLICABLE, '------------'),
+                        (SEDAN, 'Sedan'),
+                        (TRUCK, 'Truck'),
+                        (COUPE, 'Coupe'),
+                        (SUV, 'SUV'),
+                        (OTHER, 'Other'))

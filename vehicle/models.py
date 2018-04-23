@@ -8,7 +8,7 @@ from . import constants as veh_const
 class Vehicle(models.Model):
     """This model represents a generic vehicle"""
     manufacturer = models.ForeignKey('manufacturer.Manufacturer', null=True, on_delete=models.SET_NULL)
-    vehicle_type = models.CharField(max_length=veh_const.VEHICLE_TYPE_MAX_LENGTH)
+    description = models.CharField(max_length=veh_const.VEHICLE_TYPE_MAX_LENGTH)
     weight = models.PositiveIntegerField()
 
     class Meta:
@@ -17,7 +17,7 @@ class Vehicle(models.Model):
 
     def __str__(self):
         """Convert Vehicle model to a string"""
-        return self.vehicle_type
+        return self.description
 
 
 class Sedan(models.Model):
@@ -27,7 +27,7 @@ class Sedan(models.Model):
 
     def __str__(self):
         """Convert Sedan to a string"""
-        return '{} with sedan class of {}.'.format(self.vehicle.vehicle_type, self.sedan_class)
+        return '{} with sedan class of {}.'.format(self.vehicle, self.sedan_class)
 
 
 class Truck(models.Model):
@@ -40,9 +40,9 @@ class Truck(models.Model):
 
     def __str__(self):
         """Convert Truck to a string"""
-        return '{} with a bed length of {} and width of {}.'.format(self.vehicle.vehicle_type,
-                                                                   self.truck_bed_length,
-                                                                   self.truck_bed_width)
+        return '{} with a bed length of {} and width of {}.'.format(self.vehicle,
+                                                                    self.truck_bed_length,
+                                                                    self.truck_bed_width)
 
 
 class Coupe(models.Model):
@@ -52,7 +52,7 @@ class Coupe(models.Model):
 
     def __str__(self):
         """Convert Coupe to a string"""
-        return '{} with a top style of {}.'.format(self.vehicle.vehicle_type, self.top_style)
+        return '{} with a top style of {}.'.format(self.vehicle, self.top_style)
 
 
 class SUV(models.Model):
@@ -62,4 +62,4 @@ class SUV(models.Model):
 
     def __str__(self):
         """Convert SUV to a string"""
-        return '{} with a towing capacity of {}.'.format(self.vehicle.vehicle_type, self.towing_capacity)
+        return '{} with a towing capacity of {}.'.format(self.vehicle, self.towing_capacity)
