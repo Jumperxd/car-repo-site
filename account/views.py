@@ -71,7 +71,7 @@ def list_vehicle(request, **kwargs):
         if form.is_valid():
             list_data = form.save(commit=False)
             list_data.profile = request.user.profile
-            list_data.vehicle = kwargs['vehicle']
+            list_data.vehicle_id = kwargs['vehicle']
             list_data.save()
             messages.success(request, acc_const.LIST_SUCCESS_MESSAGE)
             return redirect(reverse('account:profile'))

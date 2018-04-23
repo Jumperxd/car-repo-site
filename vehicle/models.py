@@ -7,17 +7,22 @@ from . import constants as veh_const
 
 class Vehicle(models.Model):
     """This model represents a generic vehicle"""
-    manufacturer = models.ForeignKey('manufacturer.Manufacturer', null=True, on_delete=models.SET_NULL)
     description = models.CharField(max_length=veh_const.VEHICLE_TYPE_MAX_LENGTH)
     weight = models.PositiveIntegerField()
-
-    class Meta:
-        """Define constraints for this table"""
-        unique_together = ('id', 'manufacturer')
 
     def __str__(self):
         """Convert Vehicle model to a string"""
         return self.description
+
+
+class VehicleManufacturer(models.Model):
+    """This model contains relationships between manufacturers and Vehicles"""
+    manufacturer = models.ForeignKey('manufacturer.Manufacturer', on_delete=models.CASCADE)
+    vehicle = models.OneToOneField(Vehicle, on_delete=models.CASCADE)
+
+    class Meta:
+        """Table constraints"""
+        unique_together = ('manufacturer', 'vehicle')
 
 
 class Sedan(models.Model):

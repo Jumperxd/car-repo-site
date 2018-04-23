@@ -7,16 +7,19 @@ from django.shortcuts import render, redirect, reverse
 
 from carRepo import constants as main_const
 
-from . import forms as pow_forms, constants as pow_const
+from . import forms as pow_forms, constants as pow_const, models as pow_models
 
 
 @login_required
+@transaction.atomic
 def choose_powertrain(request, **kwargs):
     """This view contains logic for choosing a powertrain already in database"""
     if request.method == 'POST':
         form = pow_forms.ChoosePowerTrainForm(request.POST)
         if form.is_valid():
-            return redirect(reverse())
+            pow_models.VehiclePowerTrain.objects.create(vehicle_id=kwargs['vehicle'],
+                                                        powertrain=form.cleaned_data['powertrain'])
+            return redirect(reverse('tires:choose_tires'), kwargs={'vehicle': kwargs['vehicle']})
         messages.error(request, main_const.ERROR_MESSAGE)
     else:
         form = pow_forms.ChoosePowerTrainForm()
@@ -35,10 +38,9 @@ def add_powertrain(request, **kwargs):
     if request.method == 'POST':
         form = pow_forms.PowerTrainForm(request.POST)
         if form.is_valid():
-            powertrain = form.save(commit=False)
-            powertrain.vehicle = kwargs['vehicle']
-            powertrain.save()
-            return redirect(reverse())
+            powertrain = form.save()
+            pow_models.VehiclePowerTrain.objects.create(vehicle_id=kwargs['vehicle'], powertrain=powertrain)
+            return redirect(reverse('tires:choose_tires', kwargs={'vehicle': kwargs['vehicle']}))
         messages.error(request, main_const.ERROR_MESSAGE)
     else:
         form = pow_forms.PowerTrainForm()

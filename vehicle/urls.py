@@ -9,46 +9,6 @@ app_name = 'vehicle'
 urlpatterns = [
     path('choose-vehicle/', views.choose_vehicle, name='choose_vehicle'),
     path('add-vehicle/<int:manufacturer>/', views.add_vehicle, name='add_vehicle'),
-    path('choose-sedan/<int:vehicle>/',
-         views.ChooseVehicleSubClass.as_view(
-             form_class=forms.ChooseSedanForm,
-             context = {
-                 'title': veh_const.CHOOSE_SEDAN_TITLE,
-                 'vehicle_subclass': 'Sedan',
-                 'subclass_url': 'vehicle:add-sedan',
-             },
-        ),
-        name='choose-sedan'),
-    path('choose-truck/<int:vehicle>/',
-         views.ChooseVehicleSubClass.as_view(
-             form_class=forms.ChooseTruckForm,
-             context = {
-                 'title': veh_const.CHOOSE_TRUCK_TITLE,
-                 'vehicle_subclass': 'Truck',
-                 'subclass_url': 'vehicle:add-truck',
-             },
-        ),
-        name='choose-truck'),
-    path('choose-coupe/<int:vehicle>/',
-         views.ChooseVehicleSubClass.as_view(
-             form_class=forms.ChooseCoupeForm,
-             context = {
-                 'title': veh_const.CHOOSE_COUPE_TITLE,
-                 'vehicle_subclass': 'Coupe',
-                 'subclass_url': 'vehicle:add-coupe',
-             },
-        ),
-        name='choose-coupe'),
-    path('choose-suv/<int:vehicle>/',
-         views.ChooseVehicleSubClass.as_view(
-             form_class=forms.ChooseSUVForm,
-             context = {
-                 'title': veh_const.CHOOSE_SUV_TITLE,
-                 'vehicle_subclass': 'SUV',
-                 'subclass_url': 'vehicle:add-suv',
-             },
-        ),
-        name='choose-suv'),
     path('add-sedan/<int:vehicle>/',
          views.AddVehicleSubclass.as_view(
              form_class=forms.SedanForm,

@@ -7,7 +7,11 @@ from . import models as veh_models, constants as veh_const
 
 class ChooseVehicleForm(forms.Form):
     """This class describes a form to choose a pre-existing vehicle"""
-    vehicle = forms.ModelChoiceField(queryset=veh_models.Vehicle.objects.all())
+    sedans = forms.ModelChoiceField(queryset=veh_models.Sedan.objects.all(), required=False)
+    trucks = forms.ModelChoiceField(queryset=veh_models.Truck.objects.all(), required=False)
+    coupes = forms.ModelChoiceField(queryset=veh_models.Coupe.objects.all(), required=False)
+    suvs = forms.ModelChoiceField(queryset=veh_models.SUV.objects.all(), required=False)
+    other_vehicles = forms.ModelChoiceField(queryset=veh_models.Vehicle.objects.all(), required=False)
 
 
 class VehicleForm(forms.ModelForm):
@@ -18,17 +22,13 @@ class VehicleForm(forms.ModelForm):
         fields = ['description', 'weight']
         widgets = {
             'description': forms.TextInput(attrs={'placeholder': veh_const.VEHICLE_TYPE_PLACEHOLDER}),
+            'weight': forms.TextInput(attrs={'placeholder': veh_const.VEHICLE_WEIGHT_PLACEHOLDER}),
         }
 
 
 class VehicleTypeForm(forms.Form):
     """A form to choose the type of Vehicle"""
     vehicle_type = forms.ChoiceField(choices=veh_const.VEHICLE_TYPE_CHOICES, required=False)
-
-
-class ChooseSedanForm(forms.Form):
-    """A form to choose a pre-existing Sedan"""
-    sedan = forms.ModelChoiceField(queryset=veh_models.Sedan.objects.all())
 
 
 class SedanForm(forms.ModelForm):
@@ -39,22 +39,17 @@ class SedanForm(forms.ModelForm):
         fields = ['sedan_class']
 
 
-class ChooseTruckForm(forms.Form):
-    """A form to choose a pre-existing Sedan"""
-    truck = forms.ModelChoiceField(queryset=veh_models.Truck.objects.all())
-
-
 class TruckForm(forms.ModelForm):
     """A form to fill out information for a Truck"""
     class Meta:
         """Form attributes"""
         model = veh_models.Truck
         fields = ['truck_bed_length', 'truck_bed_width']
-
-
-class ChooseCoupeForm(forms.Form):
-    """A form to choose a pre-existing Sedan"""
-    coupe = forms.ModelChoiceField(queryset=veh_models.Coupe.objects.all())
+        widgets = {
+            'truck_bed_width': forms.TextInput(attrs={'placeholder': veh_const.TRUCK_BED_LENGTH_AND_WIDTH_PLACEHOLDER}),
+            'truck_bed_length': forms.TextInput(
+                attrs={'placeholder': veh_const.TRUCK_BED_LENGTH_AND_WIDTH_PLACEHOLDER}),
+        }
 
 
 class CoupeForm(forms.ModelForm):
@@ -65,14 +60,12 @@ class CoupeForm(forms.ModelForm):
         fields = ['top_style']
 
 
-class ChooseSUVForm(forms.Form):
-    """A form to choose a pre-existing Sedan"""
-    suv = forms.ModelChoiceField(queryset=veh_models.SUV.objects.all())
-
-
 class SUVForm(forms.ModelForm):
     """A form to fill out information for a SUV"""
     class Meta:
         """Form attributes"""
         model = veh_models.SUV
         fields = ['towing_capacity']
+        widgets = {
+            'towing_capacity': forms.TextInput(attrs={'placeholder': veh_const.SUV_TOWING_CAPACITY_PLACEHOLDER}),
+        }
