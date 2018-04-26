@@ -1,9 +1,10 @@
 # Logic for user accounts
 
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from django.db import transaction
-from django.forms import formset_factory
 from django.shortcuts import render, redirect, reverse
 
 from carRepo import constants as main_const
@@ -14,14 +15,10 @@ from . import forms as acc_forms, constants as acc_const, models as acc_models
 @transaction.atomic
 def create_user(request):
     """This view will contain logic to create a user"""
-    formset = formset_factory(acc_forms.ProfilePhoneNumberForm,
-                              min_num=acc_const.PHONE_NUMBER_FORMSET_MIN_NUM,
-                              validate_min=True,
-                              extra=acc_const.PHONE_NUMBER_FORMSET_EXTRA)
     if request.method == 'POST':
         user_form = acc_forms.UserForm(request.POST)
         profile_form = acc_forms.ProfileForm(request.POST)
-        phone_number_formset = formset(request.POST)
+        phone_number_formset = acc_forms.PhoneNumberFormset(request.POST)
         if user_form.is_valid() and profile_form.is_valid() and phone_number_formset.is_valid():
             user = user_form.save(commit=False)
             user.set_password(user_form.cleaned_data['password'])
@@ -39,7 +36,7 @@ def create_user(request):
     else:
         user_form = acc_forms.UserForm()
         profile_form = acc_forms.ProfileForm()
-        phone_number_formset = formset()
+        phone_number_formset = acc_forms.PhoneNumberFormset()
     context = {
         'title': acc_const.USER_CREATION_TITLE,
         'user_form': user_form,
@@ -50,12 +47,56 @@ def create_user(request):
 
 
 @login_required
+@transaction.atomic
+def edit_profile(request):
+    """Logic to update a user account"""
+    if request.method == 'POST':
+        user_form = acc_forms.EditUserForm(request.POST, instance=request.user)
+        profile_form = acc_forms.ProfileForm(request.POST, instance=request.user.profile)
+        phone_number_formset = acc_forms.PhoneNumberFormset(request.POST)
+        if user_form.is_valid() and profile_form.is_valid() and phone_number_formset.is_valid():
+            acc_models.ProfilePhoneNumbers.objects.filter(profile=request.user.profile).delete()
+            user_form.save()
+            profile_obj = profile_form.save()
+            for form in phone_number_formset:
+                phone_number = form.save(commit=False)
+                phone_number.profile = profile_obj
+                phone_number.save()
+            return redirect(reverse('account:profile'))
+        messages.error(request, main_const.ERROR_MESSAGE)
+    else:
+        phone_numbers = list(acc_models.ProfilePhoneNumbers.objects.filter(
+            profile=request.user.profile).values('number_type', 'phone_number'))
+        user_form = acc_forms.EditUserForm(instance=request.user)
+        profile_form = acc_forms.ProfileForm(instance=request.user.profile)
+        phone_number_formset = acc_forms.PhoneNumberFormset(initial=phone_numbers)
+    context = {
+        'title': acc_const.EDIT_ACCOUNT_TITLE,
+        'user_form': user_form,
+        'profile_form': profile_form,
+        'phone_number_formset': phone_number_formset,
+    }
+    return render(request, 'account/signup.html', context)
+
+
+@login_required
+@transaction.atomic
+def delete_account(request):
+    """Logic to delete a users account"""
+    user = User.objects.get(pk=request.user.id)
+    logout(request)
+    user.delete()
+    return redirect(reverse('index'))
+
+
+@login_required
 def profile(request):
     """Display a user profile."""
     phone_numbers = acc_models.ProfilePhoneNumbers.objects.filter(profile=request.user.profile)
     listings = acc_models.List.objects.filter(profile=request.user.profile)
     context = {
         'title': acc_const.USER_PROFILE_TITLE,
+        'delete_message': acc_const.ACCOUNT_DELETION_MESSAGE,
         'phone_numbers': phone_numbers,
         'listings': listings,
     }
@@ -82,4 +123,4 @@ def list_vehicle(request, **kwargs):
         'title': acc_const.LIST_VEHICLE_TITLE,
         'form': form,
     }
-    return render(request, 'account/list.html', context)
+    return render(request, 'main/generic_form.html', context)

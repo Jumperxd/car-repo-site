@@ -5,15 +5,6 @@ from django import forms
 from . import models as veh_models, constants as veh_const
 
 
-class ChooseVehicleForm(forms.Form):
-    """This class describes a form to choose a pre-existing vehicle"""
-    sedans = forms.ModelChoiceField(queryset=veh_models.Sedan.objects.all(), required=False)
-    trucks = forms.ModelChoiceField(queryset=veh_models.Truck.objects.all(), required=False)
-    coupes = forms.ModelChoiceField(queryset=veh_models.Coupe.objects.all(), required=False)
-    suvs = forms.ModelChoiceField(queryset=veh_models.SUV.objects.all(), required=False)
-    other_vehicles = forms.ModelChoiceField(queryset=veh_models.Vehicle.objects.all(), required=False)
-
-
 class VehicleForm(forms.ModelForm):
     """This class describes a form to add a new vehicle to the database"""
     class Meta:

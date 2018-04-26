@@ -13,37 +13,6 @@ from . import forms as veh_forms, constants as veh_const, models as veh_models
 
 
 @login_required
-def choose_vehicle(request):
-    """Choose a vehicle currently in database"""
-    if request.method == 'POST':
-        form = veh_forms.ChooseVehicleForm(request.POST)
-        if form.is_valid():
-            if form.cleaned_data['sedans']:
-                return redirect(reverse('account:list_vehicle',
-                                        kwargs={'vehicle': form.cleaned_data['sedans'].vehicle.id}))
-            elif form.cleaned_data['trucks']:
-                return redirect(reverse('account:list_vehicle',
-                                        kwargs={'vehicle': form.cleaned_data['trucks'].vehicle.id}))
-            elif form.cleaned_data['coupes']:
-                return redirect(reverse('account:list_vehicle',
-                                        kwargs={'vehicle': form.cleaned_data['coupes'].vehicle.id}))
-            elif form.cleaned_data['suvs']:
-                return redirect(reverse('account:list_vehicle',
-                                        kwargs={'vehicle': form.cleaned_data['suvs'].vehicle.id}))
-            elif form.cleaned_data['other_vehicles']:
-                return redirect(reverse('account:list_vehicle',
-                                        kwargs={'vehicle': form.cleaned_data['other_vehicles'].id}))
-        messages.error(request, main_const.ERROR_MESSAGE)
-    else:
-        form = veh_forms.ChooseVehicleForm()
-    context = {
-        'title': veh_const.CHOOSE_VEHICLE_TITLE,
-        'form': form,
-    }
-    return render(request, 'vehicle/choose_vehicle.html', context)
-
-
-@login_required
 @transaction.atomic
 def add_vehicle(request, **kwargs):
     """Adds a vehicle to the database"""

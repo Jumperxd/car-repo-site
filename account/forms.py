@@ -2,6 +2,8 @@
 
 from django import forms
 from django.contrib.auth.models import User
+from django.forms import formset_factory
+
 
 from carRepo import constants as main_const
 
@@ -14,6 +16,17 @@ class UserForm(forms.ModelForm):
         """Form attributes"""
         model = User
         fields = ['username', 'password', 'email', 'first_name', 'last_name']
+        widgets = {
+            'email': forms.TextInput(attrs={'placeholder': acc_const.EMAIL_PLACEHOLDER}),
+        }
+
+
+class EditUserForm(forms.ModelForm):
+    """A form to edit user information"""
+    class Meta:
+        """Form attributes"""
+        model = User
+        fields = ['username', 'email', 'first_name', 'last_name']
         widgets = {
             'email': forms.TextInput(attrs={'placeholder': acc_const.EMAIL_PLACEHOLDER}),
         }
@@ -49,3 +62,9 @@ class ListVehicleForm(forms.ModelForm):
         """Attributes of this form"""
         model = acc_models.List
         fields = ['address', 'car_value']
+
+
+PhoneNumberFormset = formset_factory(ProfilePhoneNumberForm,
+                                     min_num=acc_const.PHONE_NUMBER_FORMSET_MIN_NUM,
+                                     validate_min=True,
+                                     extra=acc_const.PHONE_NUMBER_FORMSET_EXTRA)

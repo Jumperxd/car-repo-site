@@ -10,8 +10,10 @@
     {% for phone_number in phone_numbers %}
         <p>{{ phone_number }}</p>
     {% endfor %}
-    <a class="btn btn-secondary">Edit Profile</a>
-    <a class="btn btn-success" href="{% url 'vehicle:choose_vehicle' %}">List a Vehicle</a>
+    <a class="btn btn-primary" href="{% url 'account:edit_profile' %}">Edit Profile</a>
+    <a class="btn btn-secondary" href="{% url 'account:change_password' %}">Change Password</a>
+    <a class="btn btn-success" href="{% url 'manufacturer:choose_manufacturer' %}">List a Vehicle</a>
+    <a class="btn btn-warning" href="{% url 'account:delete_account' %}" onclick="return confirm('{{ delete_message }}')">Delete Account</a>
     <a class="btn btn-danger" href="{% url 'index' %}">Back</a>
     {% for list in listings %}
         <p>{{ list }}</p>

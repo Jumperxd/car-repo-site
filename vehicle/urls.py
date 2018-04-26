@@ -7,7 +7,6 @@ from . import views, forms, constants as veh_const
 
 app_name = 'vehicle'
 urlpatterns = [
-    path('choose-vehicle/', views.choose_vehicle, name='choose_vehicle'),
     path('add-vehicle/<int:manufacturer>/', views.add_vehicle, name='add_vehicle'),
     path('add-sedan/<int:vehicle>/',
          views.AddVehicleSubclass.as_view(

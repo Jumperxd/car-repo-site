@@ -1,7 +1,7 @@
 # Constants used throughout apps
 
 PHONE_NUMBER_FIELD_PLACEHOLDER = '1234567890'
-ADDRESS_FIELD_PLACEHOLDER = '1234 Street/Road, State, Zip Code'
+ADDRESS_FIELD_PLACEHOLDER = '1234 Street/Road, City, State, Zip Code'
 
 INDEX_TITLE = 'Welcome to the Car Repository!'
 FIND_ALL_LISTINGS_TITLE = 'All Car Listings'

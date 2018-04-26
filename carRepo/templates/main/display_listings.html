@@ -1,6 +1,6 @@
 {% extends 'main/layout.html' %}
 {% block content %}
-    <a class="btn-primary" href="{% url 'advanced_search' %}">Advanced Listing Search</a>
+    <a class="btn btn-primary" href="{% url 'advanced_search' %}">Advanced Listing Search</a>
     <a class="btn btn-danger" href="{% url 'index' %}">Back To Home Page</a>
     {% if listings %}
         {% for list in listings %}
