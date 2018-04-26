@@ -35,13 +35,11 @@ def advanced_search(request):
         form = main_forms.AdvancedSearchForm(request.POST)
         if form.is_valid():
             listings = main_utils.determine_listings(form)
-            if listings:
-                context = {
-                    'title': main_const.ADVANCED_SEARCH_RESULTS_TITLE,
-                    'listings': listings,
-                }
-                return render(request, 'main/display_listings.html', context)
-            return redirect(reverse('find_all_listings'))
+            context = {
+                'title': main_const.ADVANCED_SEARCH_RESULTS_TITLE,
+                'listings': listings,
+            }
+            return render(request, 'main/display_listings.html', context)
         messages.error(request, main_const.ERROR_MESSAGE)
     else:
         form = main_forms.AdvancedSearchForm()

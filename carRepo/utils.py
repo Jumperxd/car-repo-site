@@ -14,7 +14,7 @@ def determine_listings(form):
     vehicles = None
     username = form.cleaned_data['username']
     address = form.cleaned_data['address']
-    max_price = form.cleaned_data['max_price']
+    max_price = form.cleaned_data['maximum_price']
     vehicle_type = form.cleaned_data['vehicle_type']
     if username or address or max_price or vehicle_type:
         if username:

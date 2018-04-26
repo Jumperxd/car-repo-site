@@ -27,7 +27,7 @@ ADD_TRUCK_TITLE = 'Add A New Truck'
 ADD_COUPE_TITLE = 'Add A New Coupe'
 ADD_SUV_TITLE = 'Add A New SUV'
 
-INAPPLICABLE = '1'
+INAPPLICABLE = ''
 SEDAN = '2'
 TRUCK = '3'
 COUPE = '4'
