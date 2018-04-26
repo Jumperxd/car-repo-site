@@ -1,18 +1,21 @@
 # Set up the Crispy forms for all forms in project.
 
-from crispy_forms.helper import FormHelper
-from crispy_forms.layout import Submit
+from account import constants as acc_const
+
 from django import forms
 
+from vehicle import constants as veh_const
 
-class CrispyModelForm(forms.ModelForm):
-    """Crispy settings for a model form"""
-    def __init__(self, *args, **kwargs):
-        """initialize crispy form"""
-        super(CrispyModelForm, self).__init__(*args, **kwargs)
-        self.helper = FormHelper()
-        self.helper.form_method = 'post'
-        self.helper.add_input(Submit('submit', 'Submit'))
-        self.helper.form_class = 'form-horizontal'
-        self.helper.label_class = 'col-md-2'
-        self.helper.field_class = 'col-md-8'
+from . import constants as main_const
+
+
+class AdvancedSearchForm(forms.Form):
+    """A form to collect search parameters"""
+    username = forms.CharField(max_length=main_const.USERNAME_MAX_LENGTH, required=False)
+    address = forms.CharField(max_length=acc_const.LIST_ADDRESS_MAX_LENGTH,
+                              help_text=main_const.ADDRESS_HELP_TEXT,
+                              required=False)
+    maximum_price = forms.DecimalField(max_digits=acc_const.LIST_CAR_VALUE_MAX_DIGITS,
+                                       decimal_places=acc_const.LIST_CAR_VALUE_DECIMAL_PLACES,
+                                       required=False)
+    vehicle_type = forms.ChoiceField(choices=veh_const.VEHICLE_TYPE_CHOICES, required=False)

@@ -9,4 +9,8 @@
         <a class="btn btn-info" href="{% url 'account:signup' %}">Create Account</a>
         <a class="btn btn-info" href="{% url 'account:login' %}">Log In</a>
     {% endif %}
+    <p>Average Price of all vehicles: ${{ average_price }}</p>
+    <p>Search Options:</p>
+    <a class="btn btn-primary" href="{% url 'advanced_search' %}">Advanced Listing Search</a>
+    <a class="btn btn-secondary" href="{% url 'find_all_listings' %}">All Current Listings</a>
 {% endblock %}
