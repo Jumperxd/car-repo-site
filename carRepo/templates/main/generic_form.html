@@ -1,4 +1,7 @@
 {% extends 'main/layout.html' %}
+{% block form_set_up %}
+    {{ form.media }}
+{% endblock %}
 {% block content %}
     {% load crispy_forms_tags %}
     <form method="post">

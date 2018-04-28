@@ -62,6 +62,9 @@ class ListVehicleForm(forms.ModelForm):
         """Attributes of this form"""
         model = acc_models.List
         fields = ['address', 'car_value']
+        widgets = {
+            'address': forms.TextInput(attrs={'placeholder': main_const.ADDRESS_FIELD_PLACEHOLDER}),
+        }
 
 
 PhoneNumberFormset = formset_factory(ProfilePhoneNumberForm,

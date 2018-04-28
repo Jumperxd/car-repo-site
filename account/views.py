@@ -142,3 +142,23 @@ def delete_listing(request, **kwargs):
     """Logic to delete a specific listing"""
     acc_models.List.objects.filter(pk=kwargs['listing']).delete()
     return redirect(reverse('account:profile'))
+
+
+@login_required
+@transaction.atomic
+def edit_listing(request, **kwargs):
+    """Logic to edit a listing"""
+    listing = acc_models.List.objects.get(pk=kwargs['listing'])
+    if request.method == 'POST':
+        form = acc_forms.ListVehicleForm(request.POST, instance=listing)
+        if form.is_valid():
+            form.save()
+        messages.error(request, main_const.ERROR_MESSAGE)
+    else:
+        form = acc_forms.ListVehicleForm(instance=listing)
+    context = {
+        'title': acc_const.EDIT_LISTING_TITLE,
+        'listing': listing,
+        'form': form,
+    }
+    return render(request, 'account/edit_list_options.html', context)

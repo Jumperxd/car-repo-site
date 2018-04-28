@@ -1,0 +1,63 @@
+{% extends 'main/generic_form.html' %}
+{% block back-button %}
+    <a class="btn btn-danger" href="{% url 'account:profile' %}">Back To Profile Page</a>
+    <p></p>
+    <h3>Change Vehicle Information:</h3>
+    <p></p>
+    <table class="table table-sm table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Part</th>
+                <th scope="col">Details</th>
+                <th scope="col">Edit</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">Manufacturer:</td>
+                <td>{{ listing.vehicle.vehiclemanufacturer.manufacturer }}</td>
+                <td><a class="btn btn-sm btn-primary" href="{% url 'manufacturer:edit_manufacturer' listing=listing.id %}">Edit</a></td>
+            </tr>
+            <tr>
+                <td scope="row">Vehicle:</td>
+                <td>{{ listing.vehicle }}</td>
+                <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+            </tr>
+            {% if listing.vehicle.sedan %}
+                <tr>
+                    <td scope="row">Sedan Info:</td>
+                    <td>{{ listing.vehicle.sedan }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                </tr>
+            {% elif listing.vehicle.truck %}
+                <tr>
+                    <td scope="row">Truck Info:</td>
+                    <td>{{ listing.vehicle.truck }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                </tr>
+            {% elif listing.vehicle.coupe %}
+                <tr>
+                    <td scope="row">Coupe Info:</td>
+                    <td>{{ listing.vehicle.coupe }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                </tr>
+            {% elif listing.vehicle.suv %}
+                <tr>
+                    <td scope="row">SUV Info:</td>
+                    <td>{{ listing.vehicle.suv }}</td>
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                </tr>
+            {% endif %}
+            <tr>
+                <td scope="row">Powertrain:</td>
+                <td>{{ listing.vehicle.vehiclepowertrain.powertrain }}</td>
+                <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+            </tr>
+            <tr>
+                <td scope="row">Tires:</td>
+                <td>{{ listing.vehicle.vehicletires.tires }}</td>
+                <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock %}

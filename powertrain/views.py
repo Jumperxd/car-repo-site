@@ -19,7 +19,7 @@ def choose_powertrain(request, **kwargs):
         if form.is_valid():
             pow_models.VehiclePowerTrain.objects.create(vehicle_id=kwargs['vehicle'],
                                                         powertrain=form.cleaned_data['powertrain'])
-            return redirect(reverse('tires:choose_tires'), kwargs={'vehicle': kwargs['vehicle']})
+            return redirect(reverse('tires:choose_tires', kwargs={'vehicle': kwargs['vehicle']}))
         messages.error(request, main_const.ERROR_MESSAGE)
     else:
         form = pow_forms.ChoosePowerTrainForm()

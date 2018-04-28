@@ -1,4 +1,8 @@
 {% extends 'main/layout.html' %}
+{% block form_set_up %}
+    {{ vehicle_form.media }}
+    {{ vehicle_type_form.media }}
+{% endblock %}
 {% block content %}
     {% load crispy_forms_tags %}
     <form method="post">

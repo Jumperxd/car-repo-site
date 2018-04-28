@@ -14,7 +14,7 @@ def index(request):
     average_price = acc_models.List.objects.all().aggregate(Avg('car_value'))
     context = {
         'title': main_const.INDEX_TITLE,
-        'average_price': average_price['car_value__avg'],
+        'average_price': float('%.2f' % average_price['car_value__avg']),
     }
     return render(request, 'main/index.html', context)
 

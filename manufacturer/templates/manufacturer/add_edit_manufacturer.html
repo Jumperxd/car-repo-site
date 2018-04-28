@@ -13,6 +13,8 @@
         {% endfor %}
         <input type="submit" class="btn btn-primary" value="Submit" style="margin-bottom: 0;" />
     </form>
+    <p></p>
+    <a class="btn btn-danger" href="{% url 'account:edit_listing' listing=listing %}">Back To Listing Edit</a>
     <script src="{% static 'main/scripts/jquery.formset.js' %}"></script>
     <script>
         $('.phone_numbers').formset({
