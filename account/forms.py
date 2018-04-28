@@ -18,7 +18,7 @@ class UserForm(forms.ModelForm):
         fields = ['username', 'password', 'email']
         widgets = {
             'email': forms.TextInput(attrs={'placeholder': acc_const.EMAIL_PLACEHOLDER}),
-            'password': forms.HiddenInput(),
+            'password': forms.PasswordInput(),
         }
 
     def clean(self):
