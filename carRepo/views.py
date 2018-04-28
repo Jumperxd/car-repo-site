@@ -13,7 +13,7 @@ def index(request):
     """This view will pass basic information for the home page"""
     average_price = acc_models.List.objects.all().aggregate(Avg('car_value'))
     if not average_price['car_value__avg']:
-        average_price = 0.0
+        average_price = 0
     else:
         average_price = float('%.2f' % average_price['car_value__avg'])
     context = {
