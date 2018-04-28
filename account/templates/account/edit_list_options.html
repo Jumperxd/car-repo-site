@@ -51,7 +51,7 @@
             <tr>
                 <td scope="row">Powertrain:</td>
                 <td>{{ listing.vehicle.vehiclepowertrain.powertrain }}</td>
-                <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                <td><a class="btn btn-sm btn-primary" href="{% url 'powertrain:choose_edit_powertrain' listing=listing.id %}">Edit</a></td>
             </tr>
             <tr>
                 <td scope="row">Tires:</td>

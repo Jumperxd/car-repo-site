@@ -30,7 +30,7 @@ def choose_manufacturer(request):
         'title': man_const.CHOOSE_MANUFACTURER_TITLE,
         'form': form,
     }
-    return render(request, 'manufacturer/choosemanufacturer.html', context)
+    return render(request, 'manufacturer/choose_manufacturer.html', context)
 
 
 @login_required
@@ -58,13 +58,13 @@ def add_manufacturer(request):
         'manufacturer_form': manufacturer_form,
         'phone_number_formset': phone_number_formset,
     }
-    return render(request, 'manufacturer/addmanufacturer.html', context)
+    return render(request, 'manufacturer/add_manufacturer.html', context)
 
 
 @login_required
 @transaction.atomic
 def choose_edit_manufacturer(request, **kwargs):
-    """Logic to choose a new manufacturer"""
+    """Logic to choose a new manufacturer on listing"""
     listing = acc_models.List.objects.get(pk=kwargs['listing'])
     if request.method == 'POST':
         form = man_forms.ChooseManufacturerForm(request.POST)
