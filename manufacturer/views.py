@@ -78,7 +78,7 @@ def choose_edit_manufacturer(request, **kwargs):
     context = {
         'title': man_const.CHOOSE_MANUFACTURER_TITLE,
         'form': form,
-        'listing': listing.id,
+        'listing': kwargs['listing'],
     }
     return render(request, 'manufacturer/choose_edit_manufacturer.html', context)
 
@@ -109,6 +109,6 @@ def add_edit_manufacturer(request, **kwargs):
         'title': man_const.ADD_MANUFACTURER_TITLE,
         'manufacturer_form': manufacturer_form,
         'phone_number_formset': phone_number_formset,
-        'listing': listing.id
+        'listing': kwargs['listing']
     }
     return render(request, 'manufacturer/add_edit_manufacturer.html', context)

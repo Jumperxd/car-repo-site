@@ -1,0 +1,16 @@
+{% extends 'main/layout.html' %}
+{% block form_set_up %}
+    {{ vehicle_form.media }}
+    {{ vehicle_type_form.media }}
+{% endblock %}
+{% block content %}
+    {% load crispy_forms_tags %}
+    <form method="post">
+        {% csrf_token %}
+        {{ vehicle_form | crispy }}
+        {{ vehicle_type_form | crispy }}
+        <button type="submit" class="btn btn-success">{{ submit | default:"Submit" }}</button>
+    </form>
+    <p></p>
+    <a class="btn btn-danger" href="{% url 'account:edit_listing' listing=listing %}">Back To Listing Edit</a>
+{% endblock %}

@@ -21,31 +21,31 @@
             <tr>
                 <td scope="row">Vehicle:</td>
                 <td>{{ listing.vehicle }}</td>
-                <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                <td><a class="btn btn-sm btn-primary" href="{% url 'vehicle:edit_vehicle' listing=listing.id %}">Edit</a></td>
             </tr>
             {% if listing.vehicle.sedan %}
                 <tr>
                     <td scope="row">Sedan Info:</td>
                     <td>{{ listing.vehicle.sedan }}</td>
-                    <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'vehicle:edit_sedan' listing=listing.id vehicle_type='2' new=0 %}">Edit</a></td>
                 </tr>
             {% elif listing.vehicle.truck %}
                 <tr>
                     <td scope="row">Truck Info:</td>
                     <td>{{ listing.vehicle.truck }}</td>
-                    <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'vehicle:edit_truck' listing=listing.id vehicle_type='3' new=0 %}">Edit</a></td>
                 </tr>
             {% elif listing.vehicle.coupe %}
                 <tr>
                     <td scope="row">Coupe Info:</td>
                     <td>{{ listing.vehicle.coupe }}</td>
-                    <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'vehicle:edit_coupe' listing=listing.id vehicle_type='4' new=0 %}">Edit</a></td>
                 </tr>
             {% elif listing.vehicle.suv %}
                 <tr>
                     <td scope="row">SUV Info:</td>
                     <td>{{ listing.vehicle.suv }}</td>
-                    <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                    <td><a class="btn btn-sm btn-primary" href="{% url 'vehicle:edit_suv' listing=listing.id vehicle_type='5' new=0 %}">Edit</a></td>
                 </tr>
             {% endif %}
             <tr>
