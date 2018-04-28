@@ -9,7 +9,7 @@ from django.shortcuts import render, redirect, reverse
 
 from carRepo import constants as main_const
 
-from . import forms as acc_forms, constants as acc_const, models as acc_models
+from . import forms as acc_forms, constants as acc_const, models as acc_models, utils as acc_utils
 
 
 @transaction.atomic
@@ -99,6 +99,7 @@ def profile(request):
         'delete_account_message': acc_const.ACCOUNT_DELETION_MESSAGE,
         'delete_all_listings_message': acc_const.ALL_LIST_DELETE_MESSAGE,
         'delete_listing_message': acc_const.LIST_DELETE_MESSAGE,
+        'age': acc_utils.age(request.user.profile.date_of_birth),
         'phone_numbers': phone_numbers,
         'listings': listings,
     }
@@ -162,3 +163,18 @@ def edit_listing(request, **kwargs):
         'form': form,
     }
     return render(request, 'account/edit_list_options.html', context)
+
+
+def contact(request, **kwargs):
+    """Logic to pass contact information to a display page"""
+    account = User.objects.get(pk=kwargs['account'])
+    phone_numbers = acc_models.ProfilePhoneNumbers.objects.filter(profile=account.profile)
+    listing = acc_models.List.objects.get(pk=kwargs['listing'])
+    context = {
+        'title': acc_const.CONTACT_TITLE,
+        'account': account,
+        'age': acc_utils.age(account.profile.date_of_birth),
+        'phone_numbers': phone_numbers,
+        'listing': listing,
+    }
+    return render(request, 'account/contact.html', context)

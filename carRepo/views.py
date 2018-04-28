@@ -47,4 +47,4 @@ def advanced_search(request):
         'title': main_const.ADVANCED_SEARCH_TITLE,
         'form': form,
     }
-    return render(request, 'main/generic_form.html', context)
+    return render(request, 'main/advanced_search.html', context)

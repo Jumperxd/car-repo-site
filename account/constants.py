@@ -22,6 +22,7 @@ LIST_VEHICLE_TITLE = 'List Address and Cost of Vehicle'
 CHANGE_PASSWORD_TITLE = 'Change Password'
 EDIT_ACCOUNT_TITLE = 'Edit Profile'
 EDIT_LISTING_TITLE = 'Edit Listing'
+CONTACT_TITLE = 'Contact Information'
 
 PHONE_NUMBER_FORMSET_MIN_NUM = 1
 PHONE_NUMBER_FORMSET_EXTRA = 0

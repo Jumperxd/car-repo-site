@@ -2,10 +2,32 @@
 {% block content %}
     <a class="btn btn-primary" href="{% url 'advanced_search' %}">Advanced Listing Search</a>
     <a class="btn btn-danger" href="{% url 'index' %}">Back To Home Page</a>
+    <p></p>
     {% if listings %}
-        {% for list in listings %}
-            <p>{{ list }}</p>
-        {% endfor %}
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Price</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Stored At</th>
+                    <th scope="col">Posted On</th>
+                    <th scope="col">Posted By</th>
+                    <th scope="col">Contact</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in listings %}
+                    <tr>
+                        <td>${{ list.car_value }}</td>
+                        <td>{{ list.vehicle }}</td>
+                        <td>{{ list.address }}</td>
+                        <td>{{ list.list_date }}</td>
+                        <td>{{ list.profile }}</td>
+                        <td><a class="btn btn-primary" href="{% url 'account:contact' account=list.profile.user.id listing=list.id %}">Contact</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     {% else %}
         <p>No Listings match your search parameters!</p>
     {% endif %}

@@ -1,0 +1,84 @@
+{% extends 'main/layout.html' %}
+{% block content %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Information</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">Username:</td>
+                <td>{{ account.username }}</td>
+            </tr>
+            {% if account.first_name %}
+                <tr>
+                    <td scope="row">First Name:</td>
+                    <td>{{ account.first_name }}</td>
+                </tr>
+            {% endif %}
+            {% if account.last_name %}
+                <tr>
+                    <td scope="row">Last Name:</td>
+                    <td>{{ account.last_name }}</td>
+                </tr>
+            {% endif %}
+            {% if account.profile.middle_initial %}
+                <tr>
+                    <td scope="row">Middle Initial:</td>
+                    <td>{{ account.profile.middle_initial }}</td>
+                </tr>
+            {% endif %}
+            {% if account.email %}
+                <tr>
+                    <td scope="row">Email:</td>
+                    <td>{{ account.email }}</td>
+                </tr>
+            {% endif %}
+            {% if account.profile.address %}
+                <tr>
+                    <td scope="row">Address:</td>
+                    <td>{{ account.profile.address }}</td>
+                </tr>
+            {% endif %}
+            {% if age %}
+                <tr>
+                    <td scope="row">Age:</td>
+                    <td>{{ age }}</td>
+                </tr>
+            {% endif %}
+            {% for phone_number in phone_numbers %}
+                <tr>
+                    <td scope="row">{{ phone_number.number_type }} Phone Number:</td>
+                    <td>{{ phone_number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+    <h3>For Listing:</h3>
+    <p></p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Price</th>
+                <th scope="col">Description</th>
+                <th scope="col">Stored At</th>
+                <th scope="col">Posted On</th>
+                <th scope="col">Posted By</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>${{ listing.car_value }}</td>
+                <td>{{ listing.vehicle }}</td>
+                <td>{{ listing.address }}</td>
+                <td>{{ listing.list_date }}</td>
+                <td>{{ listing.profile }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p></p>
+    <a class="btn btn-danger" href="{% url 'index' %}">Back To Home Page</a>
+{% endblock %}

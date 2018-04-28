@@ -42,10 +42,10 @@
                     <td>{{ user.profile.address }}</td>
                 </tr>
             {% endif %}
-            {% if user.profile.date_of_birth %}
+            {% if age %}
                 <tr>
-                    <td scope="row">Birth Date:</td>
-                    <td>{{ user.profile.date_of_birth }}</td>
+                    <td scope="row">Age:</td>
+                    <td>{{ age }}</td>
                 </tr>
             {% endif %}
             {% for phone_number in phone_numbers %}
