@@ -76,7 +76,7 @@ def edit_profile(request):
         'profile_form': profile_form,
         'phone_number_formset': phone_number_formset,
     }
-    return render(request, 'account/signup.html', context)
+    return render(request, 'account/edit_profile.html', context)
 
 
 @login_required
