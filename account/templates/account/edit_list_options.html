@@ -56,7 +56,7 @@
             <tr>
                 <td scope="row">Tires:</td>
                 <td>{{ listing.vehicle.vehicletires.tires }}</td>
-                <td><a class="btn btn-sm btn-primary" href="{% url 'index' %}">Edit</a></td>
+                <td><a class="btn btn-sm btn-primary" href="{% url 'tires:choose_edit_tires' listing=listing.id %}">Edit</a></td>
             </tr>
         </tbody>
     </table>

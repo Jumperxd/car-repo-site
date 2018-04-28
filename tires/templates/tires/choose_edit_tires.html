@@ -1,0 +1,5 @@
+{% extends 'main/generic_form.html' %}
+{% block back-button %}
+    <a class="btn btn-primary" href="{% url 'tires:add_edit_tires' listing=listing %}">Add New Tires</a>
+    <a class="btn btn-danger" href="{% url 'account:edit_listing' listing=listing %}">Back To Listing Edit</a>
+{% endblock %}

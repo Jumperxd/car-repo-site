@@ -62,7 +62,7 @@ def add_powertrain(request, **kwargs):
     if request.method == 'POST':
         form = pow_forms.PowerTrainForm(request.POST)
         if form.is_valid():
-            powertrain = form.save(commit=False)
+            powertrain = form.save(commit=False).__dict__
             del powertrain['_state']
             powertrain, created = pow_models.PowerTrain.objects.get_or_create(**powertrain)
             pow_models.VehiclePowerTrain.objects.create(vehicle_id=kwargs['vehicle'], powertrain=powertrain)
@@ -85,7 +85,7 @@ def add_edit_powertrain(request, **kwargs):
     if request.method == 'POST':
         form = pow_forms.PowerTrainForm(request.POST)
         if form.is_valid():
-            powertrain = form.save(commit=False)
+            powertrain = form.save(commit=False).__dict__
             del powertrain['_state']
             powertrain, created = pow_models.PowerTrain.objects.get_or_create(**powertrain)
             pow_models.VehiclePowerTrain.objects.filter(vehicle=listing.vehicle).update(powertrain=powertrain)
