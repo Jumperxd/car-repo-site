@@ -12,7 +12,7 @@ def validate_phone_number(phone_number):
     """A validator for a phone number"""
     if len(phone_number) < acc_const.PROFILE_PHONE_NUMBER_MAX_LENGTH:
         raise ValidationError(main_const.PHONE_NUMBER_TOO_SHORT, code=main_const.PHONE_NUMBER_TOO_SHORT_CODE)
-    elif not phone_number.is_digit():
+    elif not phone_number.isdigit():
         raise ValidationError(main_const.INVALID_PHONE_NUMBER, code=main_const.INVALID_PHONE_NUMBER_CODE)
 
 
@@ -26,4 +26,3 @@ def validate_decimals(decimal):
     """Validate decimals to ensure they are not negative and don't exceed max_digits"""
     if decimal < 0:
         raise ValidationError(main_const.NEGATIVE_DECIMAL, code=main_const.NEGATIVE_DECIMAL_CODE)
-    DecimalValidator(decimal)
