@@ -11,7 +11,7 @@ PROFILE_PHONE_NUMBER_MAX_LENGTH = 10
 PROFILE_NUMBER_TYPE_MAX_LENGTH = 30
 
 PHONE_NUMBER_TYPE_PLACEHOLDER = 'Home, Work, Cell, etc.'
-EMAIL_PLACEHOLDER = 'myemail@example.com'
+EMAIL_PLACEHOLDER = 'Format: myemail@example.com'
 
 LIST_SUCCESS_MESSAGE = 'Vehicle listed successfully!'
 ACCOUNT_DELETION_MESSAGE = 'Deleting your account will remove all listings and you will no longer be able to log in ' \

@@ -15,13 +15,13 @@
             {% if user.first_name %}
                 <tr>
                     <td scope="row">First Name:</td>
-                    <td>{{ user.first_name }}</td>
+                    <td>{{ user.profile.first_name }}</td>
                 </tr>
             {% endif %}
             {% if user.last_name %}
                 <tr>
                     <td scope="row">Last Name:</td>
-                    <td>{{ user.last_name }}</td>
+                    <td>{{ user.profile.last_name }}</td>
                 </tr>
             {% endif %}
             {% if user.profile.middle_initial %}
