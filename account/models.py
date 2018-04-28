@@ -1,19 +1,29 @@
+# Models for an account
+
+from carRepo import validators as main_val
+
 from django.db import models
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import User
 
-from . import constants as acc_const
-
-# Create your models here.
+from . import constants as acc_const, validators as acc_val
 
 
 class Profile(models.Model):
     """This model represents a User"""
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    middle_initial = models.CharField(max_length=acc_const.PROFILE_MIDDLE_INITIAL_MAX_LENGTH, blank=True)
+    first_name = models.CharField(max_length=acc_const.PROFILE_FIRST_NAME_MAX_LENGTH,
+                                  blank=True,
+                                  validators=[main_val.validate_strings])
+    last_name = models.CharField(max_length=acc_const.PROFILE_LAST_NAME_MAX_LENGTH,
+                                 blank=True,
+                                 validators=[main_val.validate_strings])
+    middle_initial = models.CharField(max_length=acc_const.PROFILE_MIDDLE_INITIAL_MAX_LENGTH,
+                                      blank=True,
+                                      validators=[main_val.validate_strings])
     address = models.CharField(max_length=acc_const.PROFILE_ADDRESS_MAX_LENGTH, blank=True)
-    date_of_birth = models.DateField(null=True, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True, validators=[acc_val.validate_birth_date])
 
     def __str__(self):
         """Convert model to a string"""
@@ -23,8 +33,12 @@ class Profile(models.Model):
 class ProfilePhoneNumbers(models.Model):
     """This model represents User phone numbers"""
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    number_type = models.CharField(max_length=acc_const.PROFILE_NUMBER_TYPE_MAX_LENGTH, default=None)
-    phone_number = models.CharField(max_length=acc_const.PROFILE_PHONE_NUMBER_MAX_LENGTH, default=None)
+    number_type = models.CharField(max_length=acc_const.PROFILE_NUMBER_TYPE_MAX_LENGTH,
+                                   default=None,
+                                   validators=[main_val.validate_strings])
+    phone_number = models.CharField(max_length=acc_const.PROFILE_PHONE_NUMBER_MAX_LENGTH,
+                                    default=None,
+                                    validators=[main_val.validate_phone_number])
 
     class Meta:
         """Set table constraints"""
@@ -44,7 +58,8 @@ class List(models.Model):
     address = models.CharField(max_length=acc_const.LIST_ADDRESS_MAX_LENGTH)
     list_date = models.DateField(auto_now_add=True)
     car_value = models.DecimalField(max_digits=acc_const.LIST_CAR_VALUE_MAX_DIGITS,
-                                    decimal_places=acc_const.LIST_CAR_VALUE_DECIMAL_PLACES)
+                                    decimal_places=acc_const.LIST_CAR_VALUE_DECIMAL_PLACES,
+                                    validators=[main_val.validate_decimals])
 
     class Meta:
         """Constraints on this table"""

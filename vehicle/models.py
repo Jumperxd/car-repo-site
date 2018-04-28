@@ -1,8 +1,10 @@
+# Models for vehicle app
+
+from carRepo import validators as main_val
+
 from django.db import models
 
 from . import constants as veh_const
-
-# Create your models here.
 
 
 class Vehicle(models.Model):
@@ -39,9 +41,11 @@ class Truck(models.Model):
     """This model represents a Truck vehicle"""
     vehicle = models.OneToOneField(Vehicle, on_delete=models.CASCADE, primary_key=True)
     truck_bed_length = models.DecimalField(max_digits=veh_const.TRUCK_BED_LENGTH_MAX_DIGITS,
-                                           decimal_places=veh_const.TRUCK_BED_LENGTH_DECIMAL_PLACES)
+                                           decimal_places=veh_const.TRUCK_BED_LENGTH_DECIMAL_PLACES,
+                                           validators=[main_val.validate_decimals])
     truck_bed_width = models.DecimalField(max_digits=veh_const.TRUCK_BED_WIDTH_MAX_DIGITS,
-                                          decimal_places=veh_const.TRUCK_BED_WIDTH_DECIMAL_PLACES)
+                                          decimal_places=veh_const.TRUCK_BED_WIDTH_DECIMAL_PLACES,
+                                          validators=[main_val.validate_decimals])
 
     def __str__(self):
         """Convert Truck to a string"""

@@ -1,11 +1,11 @@
 # Forms that exist to create an account
 
+from carRepo import constants as main_const
+
 from django import forms
 from django.contrib.auth.models import User
+from django.core.exceptions import ValidationError
 from django.forms import formset_factory
-
-
-from carRepo import constants as main_const
 
 from . import models as acc_models, constants as acc_const
 
@@ -15,10 +15,18 @@ class UserForm(forms.ModelForm):
     class Meta:
         """Form attributes"""
         model = User
-        fields = ['username', 'password', 'email', 'first_name', 'last_name']
+        fields = ['username', 'password', 'email']
         widgets = {
             'email': forms.TextInput(attrs={'placeholder': acc_const.EMAIL_PLACEHOLDER}),
+            'password': forms.HiddenInput(),
         }
+
+    def clean(self):
+        """Ensure User data meets certain criteria"""
+        if User.objects.filter(username=self.cleaned_data['username']).exists():
+            raise ValidationError(acc_const.UNIQUE_USERNAME, acc_const.UNIQUE_USERNAME_CODE)
+        elif User.objects.filter(email=self.cleaned_data['email']).exists():
+            raise ValidationError(acc_const.UNIQUE_EMAIL, code=acc_const.UNIQUE_EMAIL_CODE)
 
 
 class EditUserForm(forms.ModelForm):
@@ -26,10 +34,26 @@ class EditUserForm(forms.ModelForm):
     class Meta:
         """Form attributes"""
         model = User
-        fields = ['username', 'email', 'first_name', 'last_name']
+        fields = ['username', 'email']
         widgets = {
             'email': forms.TextInput(attrs={'placeholder': acc_const.EMAIL_PLACEHOLDER}),
         }
+
+    def __init__(self, user, *args, **kwargs):
+        """Initialize EditUserForm"""
+        super(EditUserForm, self).__init__(*args, **kwargs)
+        self.user = user
+
+    def clean(self):
+        """Ensure User data is unique"""
+        if User.objects.filter(username=self.cleaned_data['username']).exists():
+            username = User.objects.get(username=self.cleaned_data['username']).username
+            if username != self.user.username:
+                raise ValidationError(acc_const.UNIQUE_USERNAME, acc_const.UNIQUE_USERNAME_CODE)
+        if User.objects.filter(email=self.cleaned_data['email']).exists():
+            email = User.objects.get(email=self.cleaned_data['email']).email
+            if email != self.user.email:
+                raise ValidationError(acc_const.UNIQUE_EMAIL, code=acc_const.UNIQUE_EMAIL_CODE)
 
 
 class ProfileForm(forms.ModelForm):
@@ -37,7 +61,7 @@ class ProfileForm(forms.ModelForm):
     class Meta:
         """Profile form attributes"""
         model = acc_models.Profile
-        fields = ['middle_initial', 'address', 'date_of_birth']
+        fields = ['first_name', 'last_name', 'middle_initial', 'address', 'date_of_birth']
         widgets = {
             'address': forms.TextInput(attrs={'placeholder': main_const.ADDRESS_FIELD_PLACEHOLDER}),
             'date_of_birth': forms.DateInput(attrs={'type': 'date'}),

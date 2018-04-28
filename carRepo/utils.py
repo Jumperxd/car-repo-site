@@ -18,6 +18,8 @@ def determine_listings(form):
     vehicle_type = form.cleaned_data['vehicle_type']
     if username or address or max_price or vehicle_type:
         if username:
+            if not User.objects.filter(username=username).exists():
+                return None
             user = User.objects.get(username=username)
         if vehicle_type:
             if vehicle_type == veh_const.OTHER:
@@ -40,40 +42,40 @@ def determine_listings(form):
         if username and address and max_price and vehicle_type:
             listings = acc_models.List.objects.filter(profile=user.profile,
                                                       vehicle_id__in=vehicles,
-                                                      address__contains=address,
+                                                      address__icontains=address,
                                                       car_value__lte=max_price)
         elif username and address and max_price:
             listings = acc_models.List.objects.filter(profile=user.profile,
-                                                      address__contains=address,
+                                                      address__icontains=address,
                                                       car_value__lte=max_price)
         elif username and address and vehicle_type:
             listings = acc_models.List.objects.filter(profile=user.profile,
-                                                      address__contains=address,
+                                                      address__icontains=address,
                                                       vehicle_id__in=vehicles)
         elif username and max_price and vehicle_type:
             listings = acc_models.List.objects.filter(profile=user.profile,
                                                       car_value__lte=max_price,
                                                       vehicle_id__in=vehicles)
         elif address and max_price and vehicle_type:
-            listings = acc_models.List.objects.filter(address__contains=address,
+            listings = acc_models.List.objects.filter(address__icontains=address,
                                                       car_value__lte=max_price,
                                                       vehicle_id__in=vehicles)
         elif username and address:
-            listings = acc_models.List.objects.filter(profile=user.profile, address__contains=address)
+            listings = acc_models.List.objects.filter(profile=user.profile, address__icontains=address)
         elif username and max_price:
             listings = acc_models.List.objects.filter(profile=user.profile, car_value__lte=max_price)
         elif username and vehicle_type:
             listings = acc_models.List.objects.filter(profile=user.profile, vehicle_id__in=vehicles)
         elif address and max_price:
-            listings = acc_models.List.objects.filter(address__contains=address, car_value__lte=max_price)
+            listings = acc_models.List.objects.filter(address__icontains=address, car_value__lte=max_price)
         elif address and vehicle_type:
-            listings = acc_models.List.objects.filter(address__contains=address, vehicle_id__in=vehicles)
+            listings = acc_models.List.objects.filter(address__icontains=address, vehicle_id__in=vehicles)
         elif max_price and vehicle_type:
             listings = acc_models.List.objects.filter(car_value__lte=max_price, vehicle_id__in=vehicles)
         elif username:
             listings = acc_models.List.objects.filter(profile=user.profile)
         elif address:
-            listings = acc_models.List.objects.filter(address__contains=address)
+            listings = acc_models.List.objects.filter(address__icontains=address)
         elif max_price:
             listings = acc_models.List.objects.filter(car_value__lte=max_price)
         else:

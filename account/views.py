@@ -51,7 +51,7 @@ def create_user(request):
 def edit_profile(request):
     """Logic to update a user account"""
     if request.method == 'POST':
-        user_form = acc_forms.EditUserForm(request.POST, instance=request.user)
+        user_form = acc_forms.EditUserForm(request.user, request.POST, instance=request.user)
         profile_form = acc_forms.ProfileForm(request.POST, instance=request.user.profile)
         phone_number_formset = acc_forms.PhoneNumberFormset(request.POST)
         if user_form.is_valid() and profile_form.is_valid() and phone_number_formset.is_valid():
@@ -67,7 +67,7 @@ def edit_profile(request):
     else:
         phone_numbers = list(acc_models.ProfilePhoneNumbers.objects.filter(
             profile=request.user.profile).values('number_type', 'phone_number'))
-        user_form = acc_forms.EditUserForm(instance=request.user)
+        user_form = acc_forms.EditUserForm(request.user, instance=request.user)
         profile_form = acc_forms.ProfileForm(instance=request.user.profile)
         phone_number_formset = acc_forms.PhoneNumberFormset(initial=phone_numbers)
     context = {
