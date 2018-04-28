@@ -24,9 +24,11 @@ class ManufacturerPhoneNumbers(models.Model):
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
     number_type = models.CharField(max_length=man_const.MANUFACTURER_PHONE_TYPE_MAX_LENGTH,
                                    default=None,
+                                   blank=True,
                                    validators=[main_val.validate_strings])
     phone_number = models.CharField(max_length=man_const.MANUFACTURER_PHONE_MAX_LENGTH,
                                     default=None,
+                                    blank=True,
                                     validators=[main_val.validate_phone_number])
 
     class Meta:

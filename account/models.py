@@ -34,10 +34,12 @@ class ProfilePhoneNumbers(models.Model):
     """This model represents User phone numbers"""
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     number_type = models.CharField(max_length=acc_const.PROFILE_NUMBER_TYPE_MAX_LENGTH,
+                                   blank=True,
                                    default=None,
                                    validators=[main_val.validate_strings])
     phone_number = models.CharField(max_length=acc_const.PROFILE_PHONE_NUMBER_MAX_LENGTH,
                                     default=None,
+                                    blank=True,
                                     validators=[main_val.validate_phone_number])
 
     class Meta:
