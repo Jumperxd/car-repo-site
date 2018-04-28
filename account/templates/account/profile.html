@@ -1,21 +1,90 @@
 {% extends 'main/layout.html' %}
 {% block content %}
-    <p>Here is all of your user information:</p>
-    <p>First Name: {{ user.first_name }}</p>
-    <p>Last Name: {{ user.last_name }}</p>
-    <p>Middle Initial: {{ user.profile.middle_initial }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Address: {{ user.profile.address }}</p>
-    <p>Birth Date: {{ user.profile.date_of_birth }}</p>
-    {% for phone_number in phone_numbers %}
-        <p>{{ phone_number }}</p>
-    {% endfor %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Information</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">Username:</td>
+                <td>{{ user.username }}</td>
+            </tr>
+            {% if user.first_name %}
+                <tr>
+                    <td scope="row">First Name:</td>
+                    <td>{{ user.first_name }}</td>
+                </tr>
+            {% endif %}
+            {% if user.last_name %}
+                <tr>
+                    <td scope="row">Last Name:</td>
+                    <td>{{ user.last_name }}</td>
+                </tr>
+            {% endif %}
+            {% if user.profile.middle_initial %}
+                <tr>
+                    <td scope="row">Middle Initial:</td>
+                    <td>{{ user.profile.middle_initial }}</td>
+                </tr>
+            {% endif %}
+            {% if user.email %}
+                <tr>
+                    <td scope="row">Email:</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+            {% endif %}
+            {% if user.profile.address %}
+                <tr>
+                    <td scope="row">Address:</td>
+                    <td>{{ user.profile.address }}</td>
+                </tr>
+            {% endif %}
+            {% if user.profile.date_of_birth %}
+                <tr>
+                    <td scope="row">Birth Date:</td>
+                    <td>{{ user.profile.date_of_birth }}</td>
+                </tr>
+            {% endif %}
+            {% for phone_number in phone_numbers %}
+                <tr>
+                    <td scope="row">{{ phone_number.number_type }} Phone Number:</td>
+                    <td>{{ phone_number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <a class="btn btn-primary" href="{% url 'account:edit_profile' %}">Edit Profile</a>
     <a class="btn btn-secondary" href="{% url 'account:change_password' %}">Change Password</a>
     <a class="btn btn-success" href="{% url 'manufacturer:choose_manufacturer' %}">List a Vehicle</a>
-    <a class="btn btn-warning" href="{% url 'account:delete_account' %}" onclick="return confirm('{{ delete_message }}')">Delete Account</a>
-    <a class="btn btn-danger" href="{% url 'index' %}">Back</a>
-    {% for list in listings %}
-        <p>{{ list }}</p>
-    {% endfor %}
+    <a class="btn btn-warning" href="{% url 'account:delete_account' %}" onclick="return confirm('{{ delete_account_message }}');">Delete Account</a>
+    <a class="btn btn-danger" href="{% url 'index' %}">Back To Home Page</a>
+    <p></p>
+    {% if listings %}
+        <a class="btn btn btn-danger" href="{% url 'account:delete_all_listings' %}" onclick="return confirm('{{ delete_all_listings_message }}');">Delete All Listings</a>
+        <p></p>
+        <table class="table table-sm table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Listings</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for list in listings %}
+                    <tr>
+
+                        <td>{{ list }}</td>
+                        <td><a class="btn btn-sm btn-primary">Edit</a></td>
+                        <td><a class="btn btn-sm btn-danger" href="{% url 'account:delete_listing' listing=list.id %}" onclick="return confirm('{{ delete_listing_message }}');">Delete</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have no listings for any vehicles!</p>
+    {% endif %}
 {% endblock %}

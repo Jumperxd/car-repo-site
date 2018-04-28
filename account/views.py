@@ -96,7 +96,9 @@ def profile(request):
     listings = acc_models.List.objects.filter(profile=request.user.profile)
     context = {
         'title': acc_const.USER_PROFILE_TITLE,
-        'delete_message': acc_const.ACCOUNT_DELETION_MESSAGE,
+        'delete_account_message': acc_const.ACCOUNT_DELETION_MESSAGE,
+        'delete_all_listings_message': acc_const.ALL_LIST_DELETE_MESSAGE,
+        'delete_listing_message': acc_const.LIST_DELETE_MESSAGE,
         'phone_numbers': phone_numbers,
         'listings': listings,
     }
@@ -124,3 +126,19 @@ def list_vehicle(request, **kwargs):
         'form': form,
     }
     return render(request, 'main/generic_form.html', context)
+
+
+@login_required
+@transaction.atomic
+def delete_all_listings(request):
+    """Logic to delete all listings a user has"""
+    acc_models.List.objects.filter(profile=request.user.profile).delete()
+    return redirect(reverse('account:profile'))
+
+
+@login_required
+@transaction.atomic
+def delete_listing(request, **kwargs):
+    """Logic to delete a specific listing"""
+    acc_models.List.objects.filter(pk=kwargs['listing']).delete()
+    return redirect(reverse('account:profile'))

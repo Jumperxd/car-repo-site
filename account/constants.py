@@ -12,6 +12,8 @@ EMAIL_PLACEHOLDER = 'myemail@example.com'
 LIST_SUCCESS_MESSAGE = 'Vehicle listed successfully!'
 ACCOUNT_DELETION_MESSAGE = 'Deleting your account will remove all listings and you will no longer be able to log in ' \
                            'unless you create a new account.'
+ALL_LIST_DELETE_MESSAGE = 'Are you sure you want to delete all listings you have?'
+LIST_DELETE_MESSAGE = 'Are you sure you want to delete this listing?'
 
 USER_CREATION_TITLE = 'Create Account'
 LOGIN_TITLE = 'Log In to Account'

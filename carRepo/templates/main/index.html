@@ -2,15 +2,16 @@
 {% block content %}
     {% load staticfiles %}
     <img src="{% static 'main/content/images/automobile-cars-headlights-120049.jpg' %}" alt="Car Repository" class="car_image" />
-    {% if user.is_authenticated %}
-        <a class="btn btn-info" href="{% url 'account:profile' %}">{{ user.username }}</a>
-        <a class="btn btn-danger" href="{% url 'account:logout' %}">Logout</a>
-    {% else %}
-        <a class="btn btn-info" href="{% url 'account:signup' %}">Create Account</a>
-        <a class="btn btn-info" href="{% url 'account:login' %}">Log In</a>
-    {% endif %}
-    <p>Average Price of all vehicles: ${{ average_price }}</p>
-    <p>Search Options:</p>
+{#    {% if user.is_authenticated %}#}
+{#        <a class="btn btn-info" href="{% url 'account:profile' %}">{{ user.username }}</a>#}
+{#        <a class="btn btn-danger" href="{% url 'account:logout' %}">Logout</a>#}
+{#    {% else %}#}
+{#        <a class="btn btn-info" href="{% url 'account:signup' %}">Create Account</a>#}
+{#        <a class="btn btn-info" href="{% url 'account:login' %}">Log In</a>#}
+{#    {% endif %}#}
+    <p></p>
+    <h3>Average Price of all vehicles: ${{ average_price }}</h3>
+    <h4>Search Options:</h4>
     <a class="btn btn-primary" href="{% url 'advanced_search' %}">Advanced Listing Search</a>
     <a class="btn btn-secondary" href="{% url 'find_all_listings' %}">All Current Listings</a>
 {% endblock %}

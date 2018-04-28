@@ -34,4 +34,6 @@ urlpatterns = [
     path('delete-account/', acc_views.delete_account, name='delete_account'),
     path('edit-profile/', acc_views.edit_profile, name='edit_profile'),
     path('list/<int:vehicle>/', acc_views.list_vehicle, name='list_vehicle'),
+    path('delete-all-listings/', acc_views.delete_all_listings, name='delete_all_listings'),
+    path('delete-listing/<int:listing>/', acc_views.delete_listing, name='delete_listing'),
 ]

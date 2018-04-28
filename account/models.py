@@ -32,10 +32,9 @@ class ProfilePhoneNumbers(models.Model):
 
     def __str__(self):
         """Convert phone numbers to a string."""
-        return '{}: ({}) {}-{}'.format(self.number_type,
-                                       self.phone_number[:3],
-                                       self.phone_number[3:6],
-                                       self.phone_number[-4:])
+        return '({}) {}-{}'.format(self.phone_number[:3],
+                                   self.phone_number[3:6],
+                                   self.phone_number[-4:])
 
 
 class List(models.Model):
