@@ -49,7 +49,7 @@ def choose_edit_tires(request, **kwargs):
     context = {
         'title': tire_const.CHOOSE_TIRES_TITLE,
         'form': form,
-        'vehicle': kwargs['vehicle'],
+        'listing': kwargs['listing'],
     }
     return render(request, 'tires/choose_tires.html', context)
 
