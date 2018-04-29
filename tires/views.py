@@ -95,6 +95,6 @@ def add_edit_tires(request, **kwargs):
     context = {
         'title': tire_const.ADD_TIRES_TITLE,
         'form': form,
-        'listing': listing,
+        'listing': kwargs['listing'],
     }
     return render(request, 'tires/add_edit_tires.html', context)
