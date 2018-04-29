@@ -5,6 +5,7 @@ from account import models as acc_models
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
 from django.db import transaction
 from django.shortcuts import render, redirect, reverse
 from django.views import View
@@ -159,3 +160,15 @@ class EditVehicleSubclass(View, LoginRequiredMixin):
             return redirect(reverse('account:edit_listing', kwargs={'listing': kwargs['listing']}))
         messages.error(request, main_const.ERROR_MESSAGE)
         return render(request, self.template, self.context)
+
+
+def vehicle_details(request, **kwargs):
+    """Display Details of a Vehicle"""
+    account = User.objects.get(pk=kwargs['account'])
+    listing = acc_models.List.objects.get(pk=kwargs['listing'])
+    context = {
+        'title': veh_const.VEHICLE_DETAILS_TITLE,
+        'account': account,
+        'listing': listing,
+    }
+    return render(request, 'vehicle/vehicle_details.html', context)

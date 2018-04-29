@@ -26,6 +26,7 @@ ADD_COUPE_TITLE = 'Add A New Coupe'
 EDIT_COUPE_TITLE = 'Edit Coupe'
 ADD_SUV_TITLE = 'Add A New SUV'
 EDIT_SUV_TITLE = 'Edit SUV'
+VEHICLE_DETAILS_TITLE = 'Vehicle Details'
 
 INAPPLICABLE = ''
 SEDAN = '2'

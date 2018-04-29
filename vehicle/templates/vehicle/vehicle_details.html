@@ -1,0 +1,46 @@
+{% extends 'main/layout.html' %}
+{% block content %}
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Information</th>
+                <th scope="col">Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">Listed By:</td>
+                <td>{{ account.username }}</td>
+            </tr>
+            <tr>
+                <td scope="row">Vehicle Description:</td>
+                {% if listing.vehicle.sedan %}
+                    <td>{{ listing.vehicle.sedan }}</td>
+                {% elif listing.vehicle.truck %}
+                    <td>{{ listing.vehicle.truck }}</td>
+                {% elif listing.vehicle.coupe %}
+                    <td>{{ listing.vehicle.coupe }}</td>
+                {% elif listing.vehicle.suv %}
+                    <td>{{ listing.vehicle.suv }}</td>
+                {% else %}
+                    <td>{{ listing.vehicle }}</td>
+                {% endif %}
+            </tr>
+            <tr>
+                <td>Manufacturer:</td>
+                <td>{{ listing.vehicle.vehiclemanufacturer.manufacturer }}</td>
+            </tr>
+            <tr>
+                <td>Powertrain:</td>
+                <td>{{ listing.vehicle.vehiclepowertrain.powertrain }}</td>
+            </tr>
+            <tr>
+                <td>Tires:</td>
+                <td>{{ listing.vehicle.vehicletires.tires }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <p></p>
+    <a class="btn btn-primary" href="{% url 'account:contact' account=account.id listing=listing.id %}">Contact Owner</a>
+    <a class="btn btn-danger" href="{% url 'index' %}">Back To Home Page</a>
+{% endblock %}

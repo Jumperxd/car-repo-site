@@ -62,23 +62,34 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th scope="col">Price</th>
-                <th scope="col">Description</th>
-                <th scope="col">Stored At</th>
-                <th scope="col">Posted On</th>
-                <th scope="col">Posted By</th>
+                <th scope="col">Information</th>
+                <th scope="col">Details</th>
             </tr>
         </thead>
         <tbody>
             <tr>
+                <td>Price:</td>
                 <td>${{ listing.car_value }}</td>
+            </tr>
+            <tr>
+                <td>Vehicle Description:</td>
                 <td>{{ listing.vehicle }}</td>
+            </tr>
+            <tr>
+                <td>List Address:</td>
                 <td>{{ listing.address }}</td>
+            </tr>
+            <tr>
+                <td>List Date:</td>
                 <td>{{ listing.list_date }}</td>
+            </tr>
+            <tr>
+                <td>Listed By:</td>
                 <td>{{ listing.profile }}</td>
             </tr>
         </tbody>
     </table>
     <p></p>
+    <a class="btn btn-success" href="{% url 'vehicle:vehicle_details' account=account.id listing=listing.id %}">Vehicle Details</a>
     <a class="btn btn-danger" href="{% url 'index' %}">Back To Home Page</a>
 {% endblock %}

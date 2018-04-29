@@ -12,6 +12,7 @@
                     <th scope="col">Stored At</th>
                     <th scope="col">Posted On</th>
                     <th scope="col">Posted By</th>
+                    <th scope="col">Vehicle Details</th>
                     <th scope="col">Contact</th>
                 </tr>
             </thead>
@@ -23,6 +24,7 @@
                         <td>{{ list.address }}</td>
                         <td>{{ list.list_date }}</td>
                         <td>{{ list.profile }}</td>
+                        <td><a class="btn btn-success" href="{% url 'vehicle:vehicle_details' account=list.profile.user.id listing=list.id %}">Vehicle Details</a></td>
                         <td><a class="btn btn-primary" href="{% url 'account:contact' account=list.profile.user.id listing=list.id %}">Contact</a></td>
                     </tr>
                 {% endfor %}

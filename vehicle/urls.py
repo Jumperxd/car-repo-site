@@ -73,4 +73,5 @@ urlpatterns = [
              }
          ),
          name='edit_suv'),
+    path('vehicle-details/<int:account>/<int:listing>/', views.vehicle_details, name='vehicle_details'),
 ]
