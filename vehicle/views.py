@@ -58,8 +58,7 @@ def edit_vehicle(request, **kwargs):
         if vehicle_form.is_valid() and vehicle_type_form.is_valid():
             vehicle_form.save()
             vehicle_type = vehicle_type_form.cleaned_data['vehicle_type']
-            if vehicle_type:
-                veh_utils.delete_associated_subclass(listing, vehicle_type)
+            veh_utils.delete_associated_subclass(listing)
             if vehicle_type == veh_const.SEDAN:
                 return redirect(reverse('vehicle:edit_sedan', kwargs={'listing': kwargs['listing'],
                                                                       'vehicle_type': veh_const.SEDAN,
