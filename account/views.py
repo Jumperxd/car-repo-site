@@ -154,6 +154,7 @@ def edit_listing(request, **kwargs):
         form = acc_forms.ListVehicleForm(request.POST, instance=listing)
         if form.is_valid():
             form.save()
+            return redirect(reverse('account:profile'))
         messages.error(request, main_const.ERROR_MESSAGE)
     else:
         form = acc_forms.ListVehicleForm(instance=listing)
