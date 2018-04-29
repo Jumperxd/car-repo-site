@@ -51,7 +51,7 @@ def choose_edit_tires(request, **kwargs):
         'form': form,
         'listing': kwargs['listing'],
     }
-    return render(request, 'tires/choose_tires.html', context)
+    return render(request, 'tires/choose_edit_tires.html', context)
 
 
 @login_required
