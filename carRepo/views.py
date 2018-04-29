@@ -15,9 +15,10 @@ def index(request):
     if not average_price['car_value__avg']:
         average_price = 0
     else:
-        average_price = float('%.2f' % average_price['car_value__avg'])
+        average_price = round(average_price['car_value__avg'])
     context = {
         'title': main_const.INDEX_TITLE,
+        'count': acc_models.List.objects.count(),
         'average_price': average_price,
     }
     return render(request, 'main/index.html', context)

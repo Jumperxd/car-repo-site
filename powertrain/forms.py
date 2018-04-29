@@ -2,7 +2,7 @@
 
 from django import forms
 
-from . import models as pow_models
+from . import models as pow_models, constants as pow_const
 
 
 class ChoosePowerTrainForm(forms.Form):
@@ -16,3 +16,6 @@ class PowerTrainForm(forms.ModelForm):
         """Form Attributes"""
         model = pow_models.PowerTrain
         fields = ['model_number', 'drivetrain', 'engine_size']
+        widgets = {
+            'engine_size': forms.TextInput(attrs={'placeholder': pow_const.ENGINE_SIZE_PLACEHOLDER}),
+        }
