@@ -34,8 +34,7 @@ class ManufacturerPhoneNumbers(models.Model):
         unique_together = ('manufacturer', 'phone_number')
 
     def __str__(self):
-        """This function will translate this model to a string"""
-        return '{}: ({}) {}-{}'.format(self.number_type,
-                                       self.phone_number[:3],
-                                       self.phone_number[3:6],
-                                       self.phone_number[-4:])
+        """Convert phone numbers to a string."""
+        return '({}) {}-{}'.format(self.phone_number[:3],
+                                   self.phone_number[3:6],
+                                   self.phone_number[-4:])

@@ -2,6 +2,8 @@
 
 from account import models as acc_models
 
+from carRepo import constants as main_const
+
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -10,7 +12,7 @@ from django.db import transaction
 from django.shortcuts import render, redirect, reverse
 from django.views import View
 
-from carRepo import constants as main_const
+from manufacturer import models as man_models
 
 from . import forms as veh_forms, constants as veh_const, models as veh_models, utils as veh_utils
 
@@ -165,9 +167,12 @@ def vehicle_details(request, **kwargs):
     """Display Details of a Vehicle"""
     account = User.objects.get(pk=kwargs['account'])
     listing = acc_models.List.objects.get(pk=kwargs['listing'])
+    manufacturer_phone_numbers = man_models.ManufacturerPhoneNumbers.objects.filter(
+        manufacturer=listing.vehicle.vehiclemanufacturer.manufacturer)
     context = {
         'title': veh_const.VEHICLE_DETAILS_TITLE,
         'account': account,
         'listing': listing,
+        'manufacturer_phone_numbers': manufacturer_phone_numbers,
     }
     return render(request, 'vehicle/vehicle_details.html', context)

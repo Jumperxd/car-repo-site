@@ -27,20 +27,46 @@
                 {% endif %}
             </tr>
             <tr>
-                <td>Manufacturer:</td>
+                <td scope="row">Manufacturer:</td>
                 <td>{{ listing.vehicle.vehiclemanufacturer.manufacturer }}</td>
             </tr>
             <tr>
-                <td>Powertrain:</td>
+                <td scope="row">Powertrain:</td>
                 <td>{{ listing.vehicle.vehiclepowertrain.powertrain }}</td>
             </tr>
             <tr>
-                <td>Tires:</td>
+                <td scope="row">Tires:</td>
                 <td>{{ listing.vehicle.vehicletires.tires }}</td>
             </tr>
         </tbody>
     </table>
     <p></p>
+    <h3>Manufacturer Details:</h3>
+    <p></p>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Detail</th>
+                <th scope="col">Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">Name:</td>
+                <td>{{ listing.vehicle.vehiclemanufacturer.manufacturer }}</td>
+            </tr>
+            <tr>
+                <td scope="row">Address:</td>
+                <td>{{ listing.vehicle.vehiclemanufacturer.manufacturer.address }}</td>
+            </tr>
+            {% for phone_number in manufacturer_phone_numbers %}
+                <tr>
+                    <td scope="row">{{ phone_number.number_type }} Phone Number:</td>
+                    <td>{{ phone_number }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
     <a class="btn btn-primary" href="{% url 'account:contact' account=account.id listing=listing.id %}">Contact Owner</a>
     <a class="btn btn-danger" href="{% url 'index' %}">Back To Home Page</a>
 {% endblock %}

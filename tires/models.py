@@ -16,7 +16,7 @@ class Tires(models.Model):
 
     def __str__(self):
         """Convert Tires to a string"""
-        return self.description
+        return '{}. Model Number {}.'.format(self.description, self.model_number)
 
 
 class VehicleTires(models.Model):

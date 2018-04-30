@@ -17,7 +17,9 @@ class PowerTrain(models.Model):
 
     def __str__(self):
         """Convert given powertrain to a string"""
-        return '{} with engine size of {}'.format(self.drivetrain, self.engine_size)
+        return '{} with engine size of {}. Model Number {}.'.format(self.drivetrain,
+                                                                    self.engine_size,
+                                                                    self.model_number)
 
 
 class VehiclePowerTrain(models.Model):
