@@ -15,7 +15,7 @@ def index(request):
     if not average_price['car_value__avg']:
         average_price = 0
     else:
-        average_price = round(average_price['car_value__avg'])
+        average_price = '{0:.2f}'.format(average_price['car_value__avg'])
     context = {
         'title': main_const.INDEX_TITLE,
         'count': acc_models.List.objects.count(),
