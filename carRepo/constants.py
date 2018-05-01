@@ -11,6 +11,13 @@ ADVANCED_SEARCH_RESULTS_TITLE = 'Advanced Search Results'
 ERROR_MESSAGE = 'Error entering information. Please correct errors below.'
 
 USERNAME_MAX_LENGTH = 150
+POWERTRAIN_SEARCH_MAX_LENGTH = 120
+TIRES_SEARCH_MAX_LENGTH = 120
+MANUFACTURER_SEARCH_MAX_LENGTH = 300
+
+MANUFACTURER_SEARCH_HELP_TEXT = 'May search by name, address, or both.'
+VEHICLE_POWERTRAIN_SEARCH_HELP_TEXT = 'May search by model number, drivetrain, or both.'
+VEHICLE_TIRES_SEARCH_HELP_TEXT = 'May search by model number, description, or both.'
 
 ADDRESS_HELP_TEXT = 'You may enter a whole address or part of one.'
 
